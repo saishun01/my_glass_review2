@@ -1,0 +1,234 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+% 数式
+\usepackage{amsmath,amsfonts}
+\usepackage{bm}
+\usepackage{physics}
+% 画像
+\usepackage[dvipdfmx]{graphicx}
+% ローマ数字
+\usepackage{otf}
+% 単位
+\usepackage{siunitx}
+% 表
+\usepackage{multirow}
+% 化学反応
+\usepackage[version=4]{mhchem}
+
+
+\begin{document}
+
+\title{非平衡科学　後半レポート}
+\author{05-211525　齋藤駿一}
+\date{\today}
+\maketitle
+
+\section{}
+
+Fokker-Planck方程式
+\begin{align}
+  \partial_t P_X(x;t) &= - \partial_x \left[ \nu_X(x;t) P_X(x;t) \right], \\
+  \nu_X(x;t) &= - \mu \partial_x\left[U(x) + \beta^{-1} \ln{P_X(x;t)}\right], \\
+  U(x) &= \frac{1}{2}kx^2
+\end{align}
+を考える．
+加えて，確率分布はガウス分布
+\begin{equation}
+  P_X(x;t) = \frac{1}{\sqrt{2\pi \mathrm{Var}_t[x]}} \exp{-\frac{(x-\mathbb{E}_t[x])^2}{2\mathrm{Var}_t[x]}} \label{gaussian}
+\end{equation}
+で与えられるとする．
+
+このとき，
+\begin{align}
+  \mathbb{E}_t[x] &= \int \dd{x} x P_X(x;t) \label{E}\\
+  \mathrm{Var}_t[x] &= \int \dd{x} \left(x-\mathbb{E}_t[x]\right)^2 P_X(x;t) = \int \dd{x} x^2 P_X(x;t) - \mathbb{E}^2_t[x] \label{Var}
+\end{align}
+が成り立つ．
+以下では，関数の引数は基本的に省略する．
+
+\subsection*{1.1}
+
+$x$の期待値$\mathbb{E}_t[x]$の時間微分は，
+\begin{align}
+  \partial_t \mathbb{E}_t[x] 
+  &= \partial_t \int \dd{x} x P_X %\notag\\
+  = \int \dd{x} x \,\partial_t P_X %\notag\\
+  = -\int \dd{x} x\, \partial_x \left(\nu_X P_X\right) \notag\\
+  &= - \left[x\nu_X P_X\right]_{x=-\infty}^{\infty} + \int \dd{x} \nu_X P_X %\notag\\
+  = \int \dd{x} \nu_X P_X
+\end{align}
+となる．
+さらに，
+\begin{equation}
+  \nu_X P_X = -\mu \left[(\partial_x U)P_X + \beta^{-1} \partial_x P_X\right] = -\mu \left[kx P_X + \beta^{-1} \partial_x P_X\right] \label{nuP}
+\end{equation}
+より，
+\begin{align}
+  \int \dd{x} \nu_X P_X
+  &= -\mu k \int \dd{x} x P_X - \mu\beta^{-1} \int \dd{x} \partial_x P_X \notag\\
+  &= -\mu k \mathbb{E}_t[x] - \mu\beta^{-1} \left[P_X\right]_{x=-\infty}^{x=\infty} %\notag\\
+  = -\mu k \mathbb{E}_t[x] \label{i_nuP}
+\end{align}
+が分かる．
+したがって，
+\begin{equation}
+  \partial_t \mathbb{E}_t[x] = -\mu k \mathbb{E}_t[x] 
+\end{equation}
+が成り立つ．
+
+\subsection*{1.2}
+
+$x$の分散$\mathrm{Var}_t[x]$の時間微分は，
+\begin{align}
+  \partial_t \mathrm{Var}_t[x] 
+  &= \partial_t \left[ \int \dd{x} \left(x-\mathbb{E}_t[x]\right)^2 P_X \right] \notag\\
+  &= \int \dd{x} 2\left(x-\mathbb{E}_t[x]\right)(-\partial_t \mathbb{E}_t[x]) P_X + \int \dd{x} \left(x-\mathbb{E}_t[x]\right)^2 \partial_t P_X \notag\\
+  &= 2\mu k \mathbb{E}_t[x] \int \dd{x} \left(x-\mathbb{E}_t[x]\right) P_X - \int \dd{x} \left(x-\mathbb{E}_t[x]\right)^2 \partial_x \left(\nu_X P_X\right) \notag \\
+  &= 0 - \left[\left(x-\mathbb{E}_t[x]\right)^2\nu_X P_X\right]_{x=-\infty}^{\infty} + \int \dd{x} 2\left(x-\mathbb{E}_t[x]\right) \nu_X P_X \notag\\
+  &= 2\int \dd{x} \left(x-\mathbb{E}_t[x]\right) \nu_X P_X
+\end{align}
+となる．
+ただし，3番目の等号で前問の結果を用いた．
+さらに，式\eqref{nuP}より，
+\begin{align}
+  \int \dd{x} \left(x-\mathbb{E}_t[x]\right) \nu_X P_X 
+  &= -\mu k \int \dd{x} x\left(x-\mathbb{E}_t[x]\right) P_X - \mu\beta^{-1} \int \dd{x} \left(x-\mathbb{E}_t[x]\right) \partial_x P_X \notag\\
+  &= -\mu k \left[ \int \dd{x} x^2 P_X(x;t) - \mathbb{E}^2_t[x] \right] \notag\\
+  &\qquad - \mu\beta^{-1} \left[ \left(x-\mathbb{E}_t[x]\right) P_X \right]_{x=-\infty}^{\infty} + \mu\beta^{-1} \int \dd{x} P_X \notag\\
+  &= - \mu k \mathrm{Var}_t[x] + \mu \beta^{-1} \label{i_x-EnuP}
+\end{align}
+が分かる．
+したがって，
+\begin{equation}
+  \partial_t \mathrm{Var}_t[x] = - 2\mu k \mathrm{Var}_t[x] + 2\mu \beta^{-1}
+\end{equation}
+が成り立つ．
+
+\subsection*{1.3}
+
+Kullback-Leiblerダイバージェンスの定義式
+\begin{equation}
+  D_{\mathrm{KL}}(P_X(t)||P_X^{\mathrm{eq}}) = \int \dd{x} P_X \ln{\frac{P_X}{P_X^{\mathrm{eq}}(x)}}
+\end{equation}
+に式\eqref{gaussian}および
+\begin{equation}
+  P_X^{\mathrm{eq}}(x) = \frac{e^{-\beta U(x)}}{\int \dd{y} e^{-\beta U(y)}} = \frac{e^{-\beta k x^2/2}}{\int \dd{y} e^{-\beta k y^2/2}} = \sqrt{\frac{\beta k}{2\pi}} e^{-\beta k x^2/2}
+\end{equation}
+を代入すると，
+\begin{align}
+  D_{\mathrm{KL}}(P_X(t)||P_X^{\mathrm{eq}}) 
+  &= \int \dd{x} P_X \ln{\left[\sqrt{\frac{2\pi}{\beta k}} e^{\beta k x^2/2} \frac{1}{\sqrt{2\pi \mathrm{Var}_t[x]}} \exp{-\frac{(x-\mathbb{E}_t[x])^2}{2\mathrm{Var}_t[x]}}\right]} \notag\\
+  &= \ln{\sqrt{\frac{2\pi/\beta k}{2\pi \mathrm{Var}_t[x]}}} \int \dd{x} P_X + \int \dd{x} P_X \left[-\frac{(x-\mathbb{E}_t[x])^2}{2\mathrm{Var}_t[x]} + \frac{\beta k x^2}{2}\right] \notag\\
+  &= - \frac{1}{2}\ln{\left(\beta k \mathrm{Var}_t[x]\right)} - \frac{1}{2} + \frac{\beta k}{2} \left(\mathrm{Var}_t[x] + \mathbb{E}_t^2[x]\right) \label{KL}
+\end{align}
+が得られる．
+ただし，最後の変形で式\eqref{Var}を用いた．
+
+\subsection*{1.4}
+
+時刻$t$でのエントロピー生成率は
+\begin{equation}
+  \sigma(t) = \partial_t H - \beta \dot{Q} \label{sigma}
+\end{equation}
+で与えられる．
+ここで，シャノンエントロピー
+\begin{equation}
+  H = - \int \dd{x} P_X \ln{P_X}
+\end{equation}
+および熱の流入率
+\begin{equation}
+  \dot{Q} = \int_x \dd{x} U \partial_t P_X
+\end{equation}
+を用いた．
+
+まず，式\eqref{sigma}の第1項は
+\begin{align}
+  \partial_t H 
+  &= - \int \dd{x} \left(\partial_t P_X\right) \ln{P_X} 
+  = \int \dd{x} \left(\partial_x P_X\right) \ln{P_X} \notag\\
+  &= \left[\nu_X P_X \ln{P_X}\right]_{x=-\infty}^{\infty} - \int \dd{x} \nu_X P_X \frac{\partial_t P_X}{P_X} \notag\\
+  &= \mu \int \dd{x} \left(kx + \beta^{-1}\partial_x \ln{P_X}\right)\partial_xP_X \notag\\
+  &= \mu\left[\left(kx + \beta^{-1}\partial_x \ln{P_X}\right)P_X\right]_{x=-\infty}^{\infty} - \mu \int \dd{x} \left(k + \beta^{-1}\partial_x^2 \ln{P_X}\right)P_X \notag\\
+  &= -\mu k - \mu \beta^{-1} \int \dd{x} P_X \partial_x^2 \ln{P_X}
+\end{align}
+となる．
+さらに，式\eqref{gaussian}より，
+\begin{equation}
+  \partial_x \ln{P_X} = - \frac{x-\mathbb{E}_t[x]}{\mathrm{Var}_t[x]}, \qquad \partial_x^2 \ln{P_X} = - \frac{1}{\mathrm{Var}_t[x]}
+\end{equation}
+が分かる．
+よって，
+\begin{equation}
+  \partial_t H = -\mu k + \frac{\mu\beta^{-1}}{\mathrm{Var}_t[x]} \int \dd{x} P_X = -\mu k + \frac{\mu\beta^{-1}}{\mathrm{Var}_t[x]} 
+\end{equation}
+が成り立つ．
+
+一方，式\eqref{sigma}の第2項は
+\begin{align}
+  \beta\dot{Q} 
+  &= -\beta \int \dd{x} U\partial_x\left(\nu_X P_X\right) 
+  = -\beta \left[U\nu_X P_X\right]_{x=-\infty}^{\infty} + \beta \int \dd{x} \left(\partial_x U\right) \nu_X P_X \notag\\
+  &= \beta k \int \dd{x} x\nu_X P_X
+\end{align}
+となる．
+さらに，式\eqref{i_nuP}，式\eqref{i_x-EnuP}より，
+\begin{align}
+  \int \dd{x} x\nu_X P_X 
+  &= \int \dd{x} \left(x-\mathbb{E}_t[x]\right)\nu_X P_X + \mathbb{E}_t[x] \int \dd{x} \nu_X P_X \notag\\
+  &= -\mu k \mathrm{Var}_t[x] + \mu\beta^{-1} -\mu k \mathbb{E}_t^2[x]
+\end{align}
+が分かる．
+よって，
+\begin{equation}
+  \beta \dot{Q} = -\mu \beta k^2 \left(\mathrm{Var}_t[x] + \mathbb{E}_t^2[x]\right)  + \mu k 
+\end{equation}
+が成り立つ．
+
+したがって，式\eqref{sigma}は
+\begin{equation}
+  \sigma(t) = \frac{\mu\beta^{-1}}{\mathrm{Var}_t[x]} + \mu \beta k^2 \left(\mathrm{Var}_t[x] + \mathbb{E}_t^2[x]\right) - 2\mu k \label{sigma2}
+\end{equation}
+と計算できる．
+
+\subsection*{1.5}
+
+式\eqref{KL}より，
+\begin{equation}
+  \beta k \left(\mathrm{Var}_t[x] + \mathbb{E}_t^2[x]\right) = 2 D_{\mathrm{KL}}(P_X(t)||P_X^{\mathrm{eq}}) + \ln{\left(\beta k \mathrm{Var}_t[x]\right)} + 1
+\end{equation}
+が分かる．
+これを式\eqref{sigma2}に代入すると，
+\begin{align}
+  \sigma(t) &= \frac{\mu\beta^{-1}}{\mathrm{Var}_t[x]} + \mu k \left[2 D_{\mathrm{KL}}(P_X(t)||P_X^{\mathrm{eq}}) + \ln{\left(\beta k \mathrm{Var}_t[x]\right)} + 1\right] - 2\mu k \notag\\
+  &= 2\mu k D_{\mathrm{KL}}(P_X(t)||P_X^{\mathrm{eq}}) + \mu k \left[\frac{1}{\beta k \mathrm{Var}_t[x]}- 1 -\ln{\frac{1}{\beta k \mathrm{Var}_t[x]}}\right] \label{sigma3}
+\end{align}
+となる．
+ここで，KLダイバージェンスの非負性より
+\begin{equation}
+  2\mu k D_{\mathrm{KL}}(P_X(t)||P_X^{\mathrm{eq}}) \ge 0 \label{ge0_1}
+\end{equation}
+がいえる．
+さらに，実数$z>0$に対して関数$f(z)$を
+\begin{equation}
+  f(z) = z - 1 - \ln{z}
+\end{equation}
+と定義すると，
+\begin{equation}
+  \dv{f}{z} = \frac{z-1}{z},\qquad \dv[2]{f}{z} = \frac{1}{z^2} >0
+\end{equation}
+となるので，任意の$z>0$に対して
+\begin{equation}
+  f(z) \ge f(1) = 0
+\end{equation}
+が成り立つ．
+よって，$z=1/(\beta k \mathrm{Var}_t[x])$ととることで
+\begin{equation}
+  \mu k \left[\frac{1}{\beta k \mathrm{Var}_t[x]}- 1 -\ln{\frac{1}{\beta k \mathrm{Var}_t[x]}}\right] = \mu kf\left(\frac{1}{\beta k \mathrm{Var}_t[x]}\right) \ge 0 \label{ge0_2}
+\end{equation}
+がいえる．
+
+したがって，式\eqref{sigma3}の第1項と第2項はそれぞれ式\eqref{ge0_1}，式\eqref{ge0_2}より非負なので，エントロピー生成率の非負性$\sigma(t)\ge 0$が示される．
+
+
+\end{document}

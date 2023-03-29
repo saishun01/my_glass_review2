@@ -1,0 +1,202 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+% 数式
+\usepackage{amsmath,amsfonts}
+\usepackage{bm}
+\usepackage{physics}
+% 画像
+\usepackage[dvipdfmx]{graphicx}
+% ローマ数字
+\usepackage{otf}
+% 単位
+\usepackage{siunitx}
+% 表
+\usepackage{multirow}
+% 化学反応
+\usepackage[version=4]{mhchem}
+\usepackage{url}
+
+\begin{document}
+
+\title{固体物理学\ajRoman{3}　後半レポート}
+\author{05-211525　齋藤駿一}
+\date{\today}
+\maketitle
+
+\section*{問1}
+上部臨界磁場$H_{c2}$近傍の超伝導体を考えると，線形化されたGL方程式
+\begin{equation}
+  -\alpha \psi(\bm{r}) - \frac{\hbar^2}{2m}\left(\bm{\nabla} - \frac{iq}{\hbar c}\bm{A}\right)^2 \psi(\bm{r}) = 0 
+\end{equation}
+が成り立つ．
+ただし，$q=-2e$と$m=2m_e$はそれぞれクーパー対の電荷と質量である．
+これを磁束量子$\Phi_0 = - hc/q$，コヒーレンス長$\xi^2 = \hbar^2/(2m\alpha)$を用いて書き直すと，
+\begin{equation}
+  -\left(\bm{\nabla}+\frac{2\pi i}{\Phi_0}\bm{A}\right)^2 \psi(\bm{r}) = \frac{1}{\xi^2}\psi(\bm{r}) \label{eq}
+\end{equation}
+となる．
+
+\subsection*{(1)}
+z方向の磁場を表すLandauゲージ
+\begin{equation}
+  \bm{A} = \left(\begin{array}{c}
+     0 \\
+     Hx \\
+     0
+  \end{array}\right)
+\end{equation}
+を用い，$\psi(\bm{r}) = e^{ik_yy}e^{ik_zz}f(x)$を式\eqref{eq}に代入すると，
+\begin{align}
+  -\left[\dv[2]{f}{x} + \left(ik_y + \frac{2\pi iH}{\Phi_0}x\right)^2f - k_z^2 f\right]&e^{ik_yy}e^{ik_zz} = \frac{1}{\xi^2}fe^{ik_yy}e^{ik_zz} \notag\\
+  \left[-\dv[2]{}{x} + \left(\frac{2\pi H}{\Phi_0}\right)^2\left(x + \frac{\Phi_0k_y}{2\pi H}\right)^2\right]&f = \left(\frac{1}{\xi^2} - k_z^2\right)f \notag\\
+  \left[-\frac{\hbar^2}{2m}\dv[2]{}{x} + \frac{\hbar^2}{2m}\left(\frac{2\pi H}{\Phi_0}\right)^2\left(x + \frac{\Phi_0k_y}{2\pi H}\right)^2\right]&f = \frac{\hbar^2}{2m}\left(\frac{1}{\xi^2} - k_z^2\right)f 
+\end{align}
+と書ける．
+最後の変形では，両辺に$\hbar^2/(2m)$を掛けた．
+これは，
+\begin{equation}
+  x = x_0 := -\frac{\Phi_0k_y}{2\pi H} \label{x0}
+\end{equation}
+を振動中心とする調和振動子のSchr\o dinger方程式
+\begin{equation}
+  \left[-\frac{\hbar^2}{2m}\dv[2]{}{x} + \frac{m\omega^2}{2}\left(x - x_0\right)^2\right]\phi(x) = E\phi(x) 
+\end{equation}
+に対応する．
+ここで，振動数$\omega$の対応関係は，
+\begin{align}
+  \frac{m\omega^2}{2} &=  \frac{\hbar^2}{2m}\left(\frac{2\pi H}{\Phi_0}\right)^2 \notag\\
+  \omega &= \frac{2\pi\hbar H}{m\Phi_0}
+\end{align}
+である．
+
+\subsection*{(2)}
+一方，エネルギー$E$の対応関係は，
+\begin{equation}
+  E = \frac{\hbar^2}{2m}\left(\frac{1}{\xi^2} - k_z^2\right) = \left(n+\frac{1}{2}\right)\hbar \omega = \left(n+\frac{1}{2}\right)\frac{2\pi\hbar^2 H}{m\Phi_0}
+\end{equation}
+となる．
+よって，
+\begin{equation}
+  H = \frac{\Phi_0}{4\pi}\frac{1}{n+\frac{1}{2}}\left(\frac{1}{\xi^2} - k_z^2\right) \label{energy}
+\end{equation}
+が分かる．
+
+\subsection*{(3)}
+式\eqref{energy}を最大化する$n\in \mathbb{Z},k_z\in \mathbb{R}$の組み合わせは，$n=k_z=0$である．
+よって，
+\begin{equation}
+  H \le H_{c2} := \frac{\Phi_0}{2\pi}\frac{1}{\xi^2} \label{H_c2}
+\end{equation}
+である．
+
+また，熱力学的臨界磁場$H_c$について
+\begin{equation}
+  \lambda = \frac{\Phi_0}{2\pi\sqrt{2}\xi H_c}
+\end{equation}
+すなわち
+\begin{equation}
+  H_c = \frac{\Phi_0}{2\pi}\frac{1}{\sqrt{2}\xi\lambda} \label{H_c}
+\end{equation}
+が成り立つ．
+ただし，$\lambda$は磁場の侵入長である．
+式\eqref{H_c2}と式\eqref{H_c}を比べることで，第1種超伝導体（$H_{c2}<H_c$）は$\xi>\sqrt{2}\lambda$，第2種超伝導体（$H_{c2}>H_c$）は$\xi<\sqrt{2}\lambda$と特徴づけられる．
+また，$H_{c2}=\SI{0.1}{T},\SI{1}{T},\SI{10}{T}$の各々の場合において，コヒーレンス長$\xi$は
+\begin{equation}
+  \xi = \sqrt{\frac{\Phi_0}{2\pi H_{c2}}} = 
+  \begin{cases}
+    \SI{57}{nm} & (H_{c2}=\SI{0.1}{T})\\
+    \SI{18}{nm} & (H_{c2}=\SI{1}{T})\\
+    \SI{5.7}{nm} & (H_{c2}=\SI{10}{T})
+  \end{cases}
+\end{equation}
+と計算できる．
+ここで，$\Phi_0=\SI{2.07e-15}{Wb}$を用いた．
+
+\subsection*{(4)}
+$n=k_z=0$すなわち$H=H_{c2}$となる状況を考える．
+y方向は平面波なので
+\begin{equation}
+  k_y = \frac{2\pi}{L_y}n_y
+\end{equation}
+となることから，式\eqref{x0}より
+\begin{equation}
+  x_0 = -\frac{\Phi_0}{2\pi H_{c2}}\frac{2\pi}{L_y}n_y = -\frac{\Phi_0n_y}{ H_{c2}L_y}
+\end{equation}
+がいえる．
+調和振動子との対応から，この$x_0$を用いて$f(x)=\exp{-\frac{(x-x_0)^2}{2\xi^2}}$と書ける．
+
+\subsection*{(5)}
+一般解
+\begin{equation}
+  \psi(\bm{r}) = \sum_{n_y=-\infty}^{\infty} C_{n_y} e^{i\frac{2\pi}{L_y}n_yy}\exp{-\frac{\left(x+\frac{\Phi_0n_y}{H_{c2}L_y}\right)^2}{2\xi^2}}
+\end{equation}
+を考える．
+ここで，$C_{n_y+2}=C_{n_y}$より，整数$k$について$C_{n_y+2k}=C_{n_y}$が成り立つ．
+これを用いると，$n_y\to n_y+2k$という置き換えにより，
+\begin{align}
+  \psi(x,y,z) 
+  &= \sum_{n_y=-\infty}^{\infty} C_{n_y+2k} e^{i\frac{2\pi}{L_y}(n_y+2k)y}\exp{-\frac{\left(x+\frac{\Phi_0(n_y+2k)}{H_{c2}L_y}\right)^2}{2\xi^2}} \notag\\
+  &= \sum_{n_y=-\infty}^{\infty} C_{n_y} e^{i\frac{2\pi}{L_y}n_yy}\exp{-\frac{\left(x+\frac{\Phi_0n_y}{H_{c2}L_y} + \frac{2\Phi_0}{H_{c2}L_y}k \right)^2}{2\xi^2}}
+\end{align}
+と書き換えられる．
+
+ここでは，x方向に周期性$\psi(x+L_x,y,z) = \psi(x,y,z)$を仮定する．
+このとき，任意の整数$l$に対して
+\begin{equation}
+  \psi(x+lL_x,y,z) = \sum_{n_y=-\infty}^{\infty} C_{n_y} e^{i\frac{2\pi}{L_y}n_yy}\exp{-\frac{\left(x+\frac{\Phi_0n_y}{H_{c2}L_y}+lL_x\right)^2}{2\xi^2}} = \psi(x,y,z)
+\end{equation}
+が成り立つ．
+つまり，任意の整数$l$に対して
+\begin{equation}
+  lL_x = \frac{2\Phi_0}{H_{c2}L_y}k
+\end{equation}
+を満たす整数$k$が存在する．
+とくに$l=1$のときを考えると，
+\begin{equation}
+  H_{c2}L_xL_y = 2k\Phi_0 
+\end{equation}
+が得られる．
+これは，xy平面上の単位格子内を貫く磁束$H_{c2}L_xL_y$が量子化されていることを意味する．
+
+\section*{問2}
+\subsection*{(1)}
+超伝導か否かを調べるには，マイスナー効果が起こるか否かを確認すれば良い．
+主な方法として，零磁場冷却法と磁場中冷却法がある\cite{meissner}．
+零磁場冷却法は，まず零磁場下で物質を臨界温度以下に冷却し，次に磁場をかける．
+もしその物質が超伝導体なら，物質中に磁場を相殺する反磁性磁化が現れるはずである．
+磁場中冷却法は，まず臨界磁場以上で超伝導体に磁場をかけ，次に臨界温度以下まで冷却する．
+もしその物質が超伝導体なら，物質を貫いていた磁束が外側に排除されるはずである．
+
+また，非BCSか否かを調べるには，格子振動以外を媒介とする電子対の形成が起こっているかを確認すれば良い．
+たとえば，非BCS超伝導体の多くは磁気秩序相の近傍で出現するので，磁気相関によって超伝導が引き起こされると考えられている\cite{nonbcs}．
+磁気相関で電子対形成が起こる場合，電子対が組みやすい特別な方向が出現することがある．
+このような現象が見られた場合，非BCS超伝導である可能性が高いと考えられる．
+
+
+\subsection*{(2)}
+
+超流動とは，一定の流速以下で液体の粘性抵抗がゼロになる現象である．
+\ce{^4 He}は，\SI{2.17}{K}以下で粘性が消失することが知られている．
+この現象は，\ce{^4 He}がボソンであることに由来する．
+ボソンは極低温でボース・アインシュタイン凝縮を起こし，多数のボソンが基底状態に落ち込む．
+それらの粒子間での相互作用により，励起が起こらなくなると，エネルギーを失わず移動ができる．
+Landauはこの超流動現象を2流体方程式を用いて現象論的に説明した．
+このモデルによれば，超流体の振る舞いは粘性を持つ常流動成分と粘性を持たない超流動成分に分解できる．
+この成分比は温度に依存するため，熱機械効果と呼ばれる現象が起こる．
+すなわち，超流体を入れた2つのシリンダを微小な管で繋ぎ，片方のシリンダを温めると，そちらの超流動成分の濃度が下がり，化学ポテンシャルの差を打ち消すようにもう片方のシリンダから超流動成分が流れ込む．
+その結果，温めた方のシリンダの液面が上昇する．
+
+一方，フェルミオンであるはずの\ce{^3 He}も\SI{2.5}{mK}以下で粘性がなくなることが知られている．
+これは，フェルミオンであるはずの電子が極低温で抵抗なく流れる超伝導と対応しており，BCS理論と同様の考えで，2つの\ce{^3 He}がペアを作ると考えられている．
+
+\begin{thebibliography}{99}
+  \bibitem{meissner} 内藤方夫(1990)．マイスナー効果．応用物理．59(5)，651-652．\\
+  \url{https://doi.org/10.11470/oubutsu1932.59.651}
+  \bibitem{nonbcs} 北海道大学低温物理学研究室\\
+  \url{http://phys.sci.hokudai.ac.jp/LABS/ltphys/research/superconductivity.html}
+  \bibitem{he} 東京大学低温科学研究センター\\
+  \url{http://www.crc.u-tokyo.ac.jp/other/super-fluid.html}
+\end{thebibliography}
+
+\end{document}

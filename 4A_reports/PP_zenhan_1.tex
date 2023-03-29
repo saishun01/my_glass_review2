@@ -1,0 +1,222 @@
+\section*{1}
+重心系で見た衝突前の全系のエネルギーを$E_{\mathrm{CM}}$とし，実験室系で見た衝突する陽子のそれぞれのエネルギー，運動量を$E_i,\vec{p}_i\,(i=1,2)$とおくと，
+\begin{equation}
+  E_{\mathrm{CM}}^2 = (E_1 + E_2)^2 - (m_1 + m_2)^2
+\end{equation}
+となる．$E_{\mathrm{CM}} \ge 4m_p$が必要な条件である．
+
+\subsection*{(1)}
+$\vec{p}_2 = 0$とおくと，$E_2=m_p$と分かる．
+よって，$E_1=m_p+K$から，
+\begin{align}
+  E_{\mathrm{CM}}^2 &= (m_p+K+m_p)^2 - p_1^2 \notag\\
+  &= (2m_p+K)^2 - \left[(m_p+K)^2 - m_p^2\right] \notag\\
+  &= 4m_p^2 + 2m_pK
+\end{align}
+よって，反応が起こる条件は
+\begin{equation}
+  4m_p^2 + 2m_pK \ge (4m_p)^2
+\end{equation}
+すなわち
+\begin{equation}
+  K \ge 6m_p \approx \SI{5.63}{\GeV}
+\end{equation}
+である．
+
+\subsection*{(2)}
+$\vec{p}_1+\vec{p}_2=0$より，反応が起こる条件は，
+\begin{align}
+  E_{\mathrm{CM}}^2 = \left(2(m_p + K)\right)^2 \ge (4m_p)^2
+\end{align}
+すなわち
+\begin{equation}
+  K \ge m_p = \SI{938}{\MeV}
+\end{equation}
+である．
+
+\section*{2}
+\subsection*{2.1}
+4元運動量$p_1,p_2,p_3$の各々が4つの成分を持つので，系は計12個の変数で記述できる．
+ここで，3つの関係式
+\begin{equation}
+  p_i^2 = m_i^2\qquad i = 1,2,3
+\end{equation}
+のため，変数は9個に減らせる．
+また，崩壊前の粒子の4元運動量を$P$として，エネルギー・運動量保存則
+\begin{equation}
+  P = p_1 + p_2 + p_3
+\end{equation}
+が成り立つ．
+これは4成分それぞれで成り立つので，変数は5個に減らせる．
+さらに，系を適切に回転させることで，常に粒子1がx方向に運動し，粒子2がx-y平面に含まれるようにすることができる．
+その結果，粒子1の運動量のy,z成分と粒子2の運動量のz成分の3変数を0にできるので，変数は2個に減らせる．
+したがって，系の自由度は2である．
+
+\subsection*{2.2}
+以下では，$i=1,2,3$に対して
+\begin{equation}
+  p_i = \left(
+    \begin{array}{c}
+      E_i \\
+      \vec{p}_i
+    \end{array}
+  \right)  
+\end{equation}
+とおく．
+まず$m_{12}^2$の動く範囲を考える．
+その上でこの3体崩壊を，粒子1と2の複合粒子と粒子3への2体崩壊のように扱う．
+まず，複合粒子の運動量を
+\begin{equation}
+  p_{12} = p_1 + p_2
+\end{equation}
+と定義すると，エネルギー・運動量保存則は
+\begin{equation}
+  P = p_{12} + p_3
+\end{equation}
+と書ける．
+ここで，崩壊前の粒子は静止していることから，
+\begin{equation}
+  P = \left(
+    \begin{array}{c}
+      M \\
+      \vec{0}
+    \end{array}
+  \right)
+\end{equation}
+となる．
+よって，$P\cdot p_3 = ME_3$が成り立つ．
+以上より，
+\begin{align}
+  m_{12}^2 &= \left(p_1 + p_2\right)^2 \notag\\
+  &= \left(P - p_3\right)^2 \notag\\
+  &= P^2 + p_3^2 - 2P\cdot p_3 \notag\\
+  &= M^2 + m_3^2 - 2ME_3
+\end{align}
+がいえる．
+ここで，
+\begin{equation}
+  E_3 = \sqrt{\vec{p}_3^2 + m_3^2} \ge m_3
+\end{equation}
+より，
+\begin{equation}
+  m_{12}^2 \le M^2 + m_3^2 - 2Mm_3 = \left(M - m_3\right)^2
+\end{equation}
+が分かる．
+一方，
+\begin{align}
+  m_{12}^2 &= \left(p_1 + p_2\right)^2 \notag\\
+  &= p_1^2 + p_2^2 + 2p_1\cdot p_2 \notag\\
+  &= m_1^2 + m_2^2 + 2p_1\cdot p_2 
+\end{align}
+であり，
+\begin{align}
+  p_1 \cdot p_2 &= E_1E_2 - \vec{p}_1 \cdot \vec{p}_2 \notag\\
+  &\ge E_1E_2 - \left| p_1 \right| \left| p_2 \right| \notag\\
+  &= E_1E_2 - \sqrt{E_1^2 - m_1^2} \sqrt{E_2^2 - m_2^2} \notag\\
+  &\ge E_1E_2 - E_1E_2 + m_1m_2 \notag\\
+  &= m_1m_2
+\end{align}
+が成り立つので，
+\begin{equation}
+  m_{12}^2 \ge m_1^2 + m_2^2 + 2m_1m_2 = \left(m_1 + m_2\right)^2
+\end{equation}
+がいえる．
+以上より，
+\begin{equation}
+  \left(m_1 + m_2\right)^2\le m_{12}^2 \le \left(M - m_3\right)^2 
+\end{equation}
+が成り立つ．
+同様にして，
+\begin{equation}
+  \left(m_2 + m_3\right)^2\le m_{23}^2 \le \left(M - m_1\right)^2 
+\end{equation}
+もいえる．
+
+\subsection*{2.3}
+\begin{equation}
+  E_2^* = \frac{m_{12}^2 - m_1^2 + m_2^2}{2m_{12}},\qquad E_3^* = \frac{M^2 - m_{12}^2 + m_3^2}{2m_{12}}
+\end{equation}
+を用いると，
+\begin{align}
+  m_1^2 &= -2m_{12}E_2^* + m_{12}^2 + m_2^2 \\
+  M^2 &= 2m_{12} E_3^* + m_{12}^2 - m_3^2
+\end{align}
+が分かるので，前問より
+\begin{align}
+  (m_2+m_3)^2 \le m_{23}^2 &\le M^2 - 2Mm_1 + m_1^2 \notag\\
+  &= 2m_{12}(E_3^*-E_2^*+m_{12}) + m_2^2 - m_3^2 \notag\\
+  &\qquad - 2\sqrt{(-2m_{12}E_2^* + m_{12}^2 + m_2^2)(2m_{12} E_3^* + m_{12}^2 - m_3^2)}
+\end{align}
+と書ける．
+
+\section*{3}
+\subsection*{3.1}
+運動量保存則より，$\pi^0$と$n$の運動量はそれぞれ$\vec{p}, -\vec{p}$と書ける．
+これより，それぞれのエネルギーは
+\begin{align}
+  E_{\pi^0}^2 &= \left|\vec{p}\right|^2 + m_{\pi^0}^2 \\
+  E_{n}^2 &= \left|\vec{p}\right|^2 + m_{n}^2 
+\end{align}
+となる．
+辺々引いて，エネルギー保存則
+\begin{equation}
+  E_{\pi^0} + E_{n} = m_{\pi^-} + m_{p}
+\end{equation}
+を用いると，
+\begin{equation}
+  E_{\pi^0} - E_{n} = \frac{m_{\pi^0}^2-m_{n}^2}{m_{\pi^-} + m_{p}}
+\end{equation}
+がいえる．したがって，これとエネルギー保存則から
+\begin{equation}
+  E_{\pi^0} = \frac{1}{2} \left(m_{\pi^-} + m_{p} + \frac{m_{\pi^0}^2-m_{n}^2}{m_{\pi^-} + m_{p}}\right)
+\end{equation}
+がいえる．
+よって，
+\begin{equation}
+  E_{\pi^0} = \frac{m_{\pi^0}}{\sqrt{1-\beta^2}}
+\end{equation}
+と書けることを用いると，
+\begin{equation}
+  \beta = \sqrt{1- \left(\frac{2m_{\pi^0}(m_{\pi^-}+m_p)}{(m_{\pi^0}+m_p)^2+(m_{\pi^0}^2-m_n^2)}\right)^2} \approx 0.194
+\end{equation}
+と求まる．
+
+\subsection*{3.2}
+$\pi^0$が崩壊してできる2つの光子のエネルギーと運動量をそれぞれ$E_i, \vec{p}_i\,(i=1,2)$とおくと，光子の質量がゼロであることとエネルギー・運動量保存則から
+\begin{align}
+  E_{\pi^0} &= E_1 + E_2 = \left|\vec{p}_1\right| + \left|\vec{p}_2\right|\\
+  \vec{p} &= \vec{p}_1 + \vec{p}_2
+\end{align}
+が成り立つ．
+ここで，$\vec{p}$と$\vec{p}_1$のなす角を$\theta$として
+\begin{equation}
+  \vec{p}\cdot \vec{p}_1 =   \left|\vec{p}\right|\left|\vec{p}_1\right|\cos{\theta}
+\end{equation}
+が成り立つとする．
+このとき，
+\begin{align}
+  m_{\pi^0}^2 &= E_{\pi^0}^2 - \vec{p}^2 \notag\\
+  &= 2\left(\left|\vec{p}_1\right|\left|\vec{p}_2\right| - \vec{p}_1\cdot \vec{p}_2\right) \notag\\
+  &= 2\left(\left|\vec{p}_1\right|\left(E_{\pi^0} - \left|\vec{p}_1\right|\right) - \vec{p}_1\cdot \left(\vec{p}-\vec{p}_1\right)\right) \notag\\
+  &= 2\left|\vec{p}_1\right| \left(E_{\pi^0} - \left|\vec{p}\right|\cos{\theta}\right) \notag\\
+  &= 2E_1 \left(E_{\pi^0} - \left|\vec{p}\right|\cos{\theta}\right)
+\end{align}
+より，
+\begin{equation}
+  E_1 = \frac{m_{\pi^0}^2}{2(E_{\pi^0}-\left|\vec{p}\right|\cos{\theta})}
+\end{equation}
+と求まる．
+したがって，
+\begin{equation}
+  \frac{m_{\pi^0}^2}{2(E_{\pi^0} + \left|\vec{p}\right|)}\le E_1 \le \frac{m_{\pi^0}^2}{2(E_{\pi^0} - \left|\vec{p}\right|)}
+\end{equation}
+がいえる．
+これを$\beta$を用いて書き直すと，
+\begin{equation}
+  \frac{m_{\pi^0}\sqrt{1-\beta^2}}{2(1+\beta)}\le E_1 \le \frac{m_{\pi^0}\sqrt{1-\beta^2}}{2(1-\beta)}
+\end{equation}
+となるので，値を代入すると，
+\begin{equation}
+  \SI{55.4}{\MeV} \le E_1 \le \SI{82.2}{\MeV}
+\end{equation}
+となる．

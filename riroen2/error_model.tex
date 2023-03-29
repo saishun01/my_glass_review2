@@ -1,0 +1,28 @@
+\subsection{セットアップ}
+次に，Himeoka and Kaneko (2017)のモデル\cite{hk17}を参考に，代謝物Xを生成する反応が失敗しうるモデルを考えた．
+まず，代謝物Xを作る反応において，ある確率$\epsilon$でエラーが発生し，ゴミ分子Zができると仮定する．
+さらに，ゴミ分子Zは代謝物Xと可逆的に結合し，複合体Cを作ると仮定する．
+これは，代謝物Xの自己触媒を阻害する反応である．
+つまり，以下の拡散および反応を考える：
+\begin{align}
+  \ce{N &<->[$D$] Y} \\
+  \ce{Y + X &->[$k(1-\epsilon)$] X + X} \\
+  \ce{Y + X &->[$k\epsilon$] Z + X} \\
+  \ce{Z + X &<=>[$k_1$][$k_2$] C} \\
+  \ce{X &->[\phi] \emptyset}.
+\end{align}
+よって，化学種X,Y,Z,Cの濃度をそれぞれ$x,y,z,c$とおくと，方程式は次のようになる：
+\begin{align}
+  \frac{dx}{dt} &= k(1-\epsilon)xy - k_1 xz + k_2 c - \phi x - \mu x\\
+  \frac{dy}{dt} &= D(n-y) - kxy - \mu y \\
+  \frac{dz}{dt} &= k\epsilon xy - k_1 xz + k_2 c - \mu z \\
+  \frac{dc}{dt} &= k_1 xz - k_2 c - \mu c \\ 
+  \mu &= \gamma \phi x.
+\end{align}
+
+\subsection{結果と考察}
+\input{error_model_1}
+
+\input{error_model_2}
+
+\input{error_model_3}

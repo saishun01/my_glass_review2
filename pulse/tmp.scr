@@ -1,0 +1,5 @@
+set terminal postscript enhanced color lw 3.0
+set output "life.ps" 
+set xlabel "TIME ({/Symbol m}s)" 
+set ylabel "ln(COUNTS/bin)" 
+plot "life-merged-bins.dat" with yerrorbar, -0.467380*x+8.603167

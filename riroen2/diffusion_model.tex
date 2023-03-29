@@ -1,0 +1,91 @@
+\subsection{セットアップ}
+先ほどのモデルでは，細胞内の栄養濃度は細胞外の栄養濃度と等しい定数であると考えていた．
+しかし実際には，細胞内の栄養濃度は，細胞外からの栄養分子の流入と細胞内での反応による消費によって変動する量と考えるべきである．
+そこで次に，細胞外の栄養濃度のみを定数とし，細胞内の栄養濃度を変数としたモデルを考える．
+つまり，細胞外の栄養分子をN，細胞内の栄養分子をYとしたとき，拡散（拡散係数$D$）による流出入
+\begin{equation}
+  \ce{N <->[$D$] Y}
+\end{equation}
+を考え，自己触媒反応として
+\begin{equation}
+  \ce{Y + X ->[$k$] X + X}
+\end{equation}
+を考える．
+代謝物Xの消費とそれによる細胞の成長は，先ほどと同様に考える．
+
+このとき，細胞内の栄養濃度を$y$として，方程式\eqref{logistic}は
+\begin{equation}
+  \frac{dx}{dt} = \gamma \phi x \left[\frac{1}{\gamma}\left(\frac{k}{\phi} y - 1\right) - x \right] 
+\end{equation}
+と書き換えられる．
+一方，細胞内の栄養濃度$y$に関する微分方程式は，細胞外の栄養濃度$n$を用いて
+\begin{equation}
+  \frac{dy}{dt} = D(n-y) - kxy - \mu y.
+\end{equation}
+と書ける．
+これは
+\begin{equation}
+  \frac{dy}{dt} = Dn - \left[ D + \left(k + \gamma \phi \right)x \right]y
+\end{equation}
+と書き換えられる．
+さらに，これらの$x,y$に関する微分方程式は，
+\begin{equation}
+  \tilde{x} = \frac{k + \gamma \phi}{D}x,\qquad \tilde{y} = \frac{k}{\phi} y, \qquad \tilde{t} = Dt
+\end{equation}
+と変数変換することで，次のように無次元化することができる：
+\begin{align}
+  \frac{d\tilde{x}}{d\tilde{t}} &= \alpha \tilde{x} \left[ \beta \left( \tilde{y} - 1 \right) - \tilde{x} \right] \label{ndx}\\
+  \frac{d\tilde{y}}{d\tilde{t}} &= \frac{kn}{\phi} - \left( \tilde{x} + 1\right)\tilde{y}. \label{ndy} 
+\end{align}
+ただし，
+\begin{equation}
+  \alpha = \frac{\gamma\phi}{k + \gamma\phi},\qquad \beta = \frac{k + \gamma\phi}{\gamma D}
+\end{equation}
+とおいた．
+
+\subsection{結果と考察}
+この細胞モデルでも，先ほどとまったく同様に，成長条件が$n>\phi/k$となることが示せる．
+その証明は以下の通りである．
+
+無次元化した方程式\eqref{ndx}，\eqref{ndy}の定常解で$\tilde{x}, \tilde{y} \ge 0$を満たすものは，
+\begin{equation}
+  \begin{cases}
+    \frac{k}{\phi} n > 1 \text{のとき} & (\tilde{x},\tilde{y}) = \left(0, \frac{kn}{\phi}\right),\, \left(\tilde{x}^*, \tilde{y}^*\right) \\
+    \frac{k}{\phi} n < 1 \text{のとき} & (\tilde{x},\tilde{y}) = \left(0, \frac{kn}{\phi}\right)
+  \end{cases}
+\end{equation}
+である．ただし，
+\begin{equation}
+  \tilde{x}^* = \frac{\sqrt{(\beta-1)^2+4\beta kn/\phi} - (\beta+1)}{2}, \qquad \tilde{y}^* = \frac{\sqrt{(\beta-1)^2+4\beta kn/\phi} + (\beta-1)}{2\beta}
+\end{equation}
+とおいた．
+これらの定常解の安定性を調べるため，$(\tilde{x}, \tilde{y})$におけるヤコビ行列を計算すると，
+\begin{equation}
+  J = \begin{pmatrix}
+    \alpha\beta (\tilde{y} -1) -2\alpha \tilde{x} & \alpha\beta \tilde{x} \\
+    - \tilde{y} & - \tilde{x} - 1 \\
+    \end{pmatrix}
+\end{equation}
+となる．
+まず，$(\tilde{x}, \tilde{y}) = (\tilde{x}^*, \tilde{y}^*)$において，ヤコビ行列の固有値を計算すると，
+\begin{equation}
+  \lambda = \frac{-(\alpha \tilde{x}^* + \tilde{x}^* + 1) \pm \sqrt{(\alpha \tilde{x}^* + \tilde{x}^* + 1)^2 - 4\alpha \tilde{x}^* (\tilde{x}^* + \beta\tilde{y}^* + 1)}}{2}
+\end{equation}
+と求まる．
+根号の中身が非負のとき，固有値は二つの負の実数となり，根号の中身が負のとき，固有値は実部が負となる二つの複素数となる．
+よって，常に固有値$\lambda$の実部は負となるので，定常解$(\tilde{x}, \tilde{y}) = (\tilde{x}^*, \tilde{y}^*)$は安定である．
+一方で，$(\tilde{x}, \tilde{y}) = (0, kn/\phi)$においては，固有値は
+\begin{equation}
+  \lambda = -1,\,\alpha \beta \left(\frac{kn}{\phi} - 1\right)
+\end{equation}
+と求まる．
+よってこの定常解は，$kn/\phi < 1$のとき安定，$kn/\phi > 1$のとき不安定となる．
+以上より，安定な定常解は次のようになる：
+\begin{equation}
+  \begin{cases}
+    \frac{k}{\phi} n > 1 \text{のとき} & (\tilde{x},\tilde{y}) = \left(\tilde{x}^*, \tilde{y}^*\right) \\
+    \frac{k}{\phi} n < 1 \text{のとき} & (\tilde{x},\tilde{y}) = \left(0, \frac{kn}{\phi}\right).
+  \end{cases}
+\end{equation}
+したがって，成長速度が正，つまり$\tilde{x} > 0$であるには，やはり$n > n^* = \phi/k$が必要となる．
+これは，細胞内外で栄養濃度が共通であると考えた先ほどのモデルと同じ結果である．

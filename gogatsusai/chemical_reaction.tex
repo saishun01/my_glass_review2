@@ -1,0 +1,52 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+% 数式
+\usepackage{amsmath,amsfonts}
+\usepackage{bm}
+\usepackage{physics}
+% 画像
+\usepackage[dvipdfmx]{graphicx}
+% ローマ数字
+\usepackage{otf}
+% 単位
+\usepackage{siunitx}
+% 表
+\usepackage{multirow}
+% 化学反応
+\usepackage[version=4]{mhchem}
+% 引用
+\usepackage{url}
+
+\begin{document}
+
+\title{アロステリック制御}
+\author{生物物理班　齋藤駿一}
+\date{\today}
+\maketitle
+
+\tableofcontents
+
+\input{chem_intro.tex}
+
+\input{chem_hill.tex}
+
+\input{chem_mwc.tex}
+
+\input{chem_mbhb.tex}
+
+\begin{thebibliography}{99}
+  \bibitem{TBoC} 金子邦彦，澤井哲，高木拓明，古澤力．『細胞の理論生物学　ダイナミクスの視点から』．東京大学出版会，2020．
+  
+  \bibitem{PBoC} Phillips, R., Kondev, J., and Theriot, J. \textit{Physical Biology of the Cell}. Garland Science, 2008；邦訳：『細胞の物理生物学』．共立出版，2011．
+  %笹井理生，伊藤一仁，千見寺浄慈，寺田智樹．
+
+  \bibitem{akami} 魚食普及推進センター．「赤身魚と白身魚の違い　そして・・・青魚と赤魚とは？？」．\\
+  \url{https://osakana.suisankai.or.jp/s-other/4923}, （参照 2022-4-7）．
+
+  \bibitem{review} Yuan, Y., Tam, M. F., Simplaceanu, V., and Ho, C. New Look at Hemoglobin Allostery. \textit{Chem. Rev.},  \textbf{115}(4): 1702-1724, 2015.
+
+  \bibitem{bohr} Wikipedia. ``Bohr effect".\\
+  \url{https://en.wikipedia.org/wiki/Bohr_effect}, （参照 2022-4-7）．
+\end{thebibliography}
+\end{document}

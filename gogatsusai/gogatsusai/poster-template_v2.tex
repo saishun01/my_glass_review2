@@ -1,0 +1,257 @@
+\documentclass[12pt, a4j, dvipdfmx, sffamily]{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[margin=9truemm, bottom=18truemm]{geometry}
+\usepackage{otf}
+\special{}
+
+\usepackage{amsmath, physics}
+\usepackage{amssymb}
+\usepackage{lipsum}
+
+
+
+%色
+\usepackage{xcolor}
+\definecolor{lg}{rgb}{0.56, 0.93, 0.56} %lightgreen
+\definecolor{color1}{rgb}{0.918, 0.402, 0.430}%赤
+\definecolor{color3}{rgb}{0.484, 0.750, 0.316}%緑
+
+\colorlet{thiscolor}{color3}	%テーマカラーの選択
+\colorlet{linecolor}{thiscolor!150}
+\colorlet{pagecolor}{thiscolor!40}
+\pagecolor{pagecolor}
+
+
+%ref
+\usepackage[dvipdfmx, colorlinks = true, linkcolor = lg, urlcolor=blue, citecolor = lg, anchorcolor = lg]{hyperref}
+\usepackage{pxjahyper, url}
+
+
+%ヘッダーとフッター
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot[C]{\gtfamily\sffamily\textcolor{gray}{生物物理班\hfill\thepage}}
+\renewcommand{\headrulewidth}{0pt}
+
+
+%図
+\usepackage{caption}
+\usepackage{here}
+\usepackage{wrapfig}
+\captionsetup[figure]{format=plain, labelformat=simple, labelsep=period, font={sf, footnotesize}}
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+
+
+%TikZ
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+
+
+%section関係
+\usepackage{titlesec}
+\titleformat{name=\section, numberless}
+   [hang]
+   {\vspace{2pt}\fontsize{20pt}{20pt}\selectfont}
+   {\textcolor{linecolor}{■}}
+   {3pt}
+   {\hspace{0pt}}
+   [\vspace{-5mm}\textcolor{linecolor}{\hrulefill}\vspace{-5mm}]
+
+
+%tcolorbox
+\usepackage{tcolorbox}
+\tcbuselibrary{raster, skins}
+\tcbset{	enhanced,
+		colback=white,
+		colframe=thiscolor!200,
+		sharp corners,
+		rounded corners = southeast,
+		drop shadow,
+		fonttitle=\gtfamily\sffamily\Large,
+		fontupper=\gtfamily\sffamily,
+		before upper = \parindent 1zw,
+		raster column skip = 5mm,
+		raster row skip = 5mm,
+		raster width center=\linewidth,
+		raster valign=top}
+
+%multicol
+\usepackage{multicol}
+\usepackage{comment}
+\setlength{\columnsep}{5mm}
+\newenvironment{twocols}{\begin{multicols}{2}[\vspace{-4mm}]}{\end{multicols}}
+\newenvironment{twocols*}{\begin{multicols*}{2}[\vspace{-4mm}]}{\end{multicols*}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}\sffamily\gtfamily
+\newpage
+\section*{ポスターテンプレート}
+\begin{tcbraster}[raster columns = 1]
+	\begin{tcolorbox}[title = 本文・\texttt{\textbackslash tcbline}]
+	これは本文です．数式を入れることもできます：
+		\begin{equation}
+		\dv[2]{x}{t}
+		=-ax-b\dv{x}{t}.
+		\end{equation}
+	\tcbline
+	必要に応じて\texttt{\textbackslash tcbline}で区切りを入れます．
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = 高さ , height = 30mm]
+	高さを手動で指定する場合には\texttt{tcolorbox}環境のオプションで\texttt{height}を指定すれば良いです．
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = タイトルの指定]
+	各\texttt{tcolorbox}には見出しをつけることを推奨します．\texttt{tcolorbox}環境の\texttt{title}オプションでタイトルを設定できます．
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = ポスター見出し]
+	ポスターの見出しには\texttt{\textbackslash section*}を使ってください．
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = lipsum1]
+	以下のテスト用の文章で，\texttt{lipsum}パッケージを使っています．
+	\tcbline
+	\lipsum[1]
+	\end{tcolorbox}
+\end{tcbraster}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{ポスターテンプレート2}
+\begin{tcbraster}[raster columns = 1, raster equal height]
+%%%
+	\begin{tcolorbox}[title = \texttt{raster equal height}]
+	\texttt{tcbraster}環境のオプションで\texttt{raster equal height}をつけると，全ての\texttt{tcolorbox}（枠のこと）の高さを等しくできます．
+	
+	タイプセットを2回する必要があるので注意してください．
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = lipsum2]
+	\lipsum[2]
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = lipsum3]
+	\lipsum[3]
+	\end{tcolorbox}
+\end{tcbraster}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{ポスターテンプレートポスターテンプレートポスターテンプレートポスターテンプレート3}
+\begin{twocols}
+\begin{tcbraster}[raster columns = 1]
+	\begin{tcolorbox}[title = {\texttt{twocols}環境, \texttt{\textbackslash columnbreak}}]
+	2段組の際には\texttt{twocols}環境を使ってください．スペースを既に調整してあります．
+	（\texttt{tcbraster}環境を使った方法は後述．）
+	
+	段組を改める場合には\texttt{\textbackslash columnbreak}とします．
+	\tcbline
+	\texttt{twocols}環境は\texttt{multicols}環境のスペースを少しだけいじったものです．
+	\tcbline
+	特に自動で段組をさせたくないときには\texttt{twocols*}環境を使ってください．
+	ページの最後までが2段組になります．
+	\tcbline
+	\lipsum[1][1-3]
+	\end{tcolorbox}
+\columnbreak
+	\begin{tcolorbox}[title = lipsum4]
+	\lipsum[4]
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = lipsum5]
+	\lipsum[5]
+	\end{tcolorbox}
+\end{tcbraster}
+\end{twocols}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{ポスター\\テンプレート4}
+\begin{tcbraster}[raster columns = 2, raster equal height = rows]
+	\begin{tcolorbox}[title = 1. 横のものと高さを揃える]
+	横の\texttt{tcolorbox}と高さを揃えたい場合には\texttt{tcbraster}環境のオプションで\texttt{raster equal height = rows}とします．
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = 2. lipsum6]
+	\lipsum[6]
+	\end{tcolorbox}
+%%%	
+	\begin{tcolorbox}[title = 3. 順番]
+	\texttt{tcbraster}環境のオプション\texttt{raster coumns = 2}で2段組にした場合， 左上・右上・左下・右下の順番に表示されることに注意してください．
+	
+	縦に順番に表示する\texttt{twocols}環境とは異なります．
+	\tcbline
+	したがって，時系列が重要でない「箇条書きのような」使い方に適しています．
+	\tcbline
+	もし，\texttt{twocols}環境のような順番で表示したい場合には1, 3, 2, 4の順番にしておけば良いです．
+	\end{tcolorbox}
+%%%	
+	\begin{tcolorbox}[title = 4. lipsum7-1]
+	\lipsum[7][1]
+	\end{tcolorbox}
+%%%
+\end{tcbraster}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{ポスターテンプレート5}
+\begin{tcbraster}[raster columns = 2, raster equal height = rows]
+	\begin{tcolorbox}[title = \texttt{raster multicolumn}, raster multicolumn = 2]
+	ページの中で1組と2段を両方使う場合には，\texttt{tcbraster}環境のオプションを\texttt{raster columns = 2}として全体を2段組とした上で，1段組にしたい\texttt{tcolorbox}にオプション\texttt{raster multicolumn = 2}とつけます．
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = lipsum7-2]
+	\lipsum[7][2-17]
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = lipsum8]
+	\lipsum[8]
+	\end{tcolorbox}
+%%%
+	\begin{tcolorbox}[title = lipsum9, raster multicolumn = 2]
+	\lipsum[9]
+	\end{tcolorbox}
+\end{tcbraster}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{ポスターテンプレート6}
+\begin{tcbraster}[raster columns = 1]
+%%%
+	\begin{tcolorbox}[title = 画像（\texttt{figure}環境）]
+	\texttt{figure}環境は使えますが，\texttt{h},\texttt{t},\texttt{b}などのオプションは使えません．
+	\texttt{tcolorbox}環境内であることが理由です．
+	
+	代わりに，\texttt{here}パッケージの\texttt{H}オプション等を用いるなどの対処をしてください．
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.2\linewidth]{logo_test.png}
+	\caption{Physics Lab.~2021のロゴ．}
+	\end{figure}
+	\end{tcolorbox}
+%%%	
+	\begin{tcolorbox}[title = 画像（\texttt{wrapfigure}環境）, height = 0.4\linewidth]
+	\begin{wrapfigure}{r}[0pt]{0.2\linewidth}
+	\centering
+	\includegraphics[width=\linewidth]{logo_test.png}
+	\caption{Physics Lab.~2021のロゴ．}
+	\end{wrapfigure}
+	%%
+	\texttt{wrapfigure}環境を使って文字の回り込みをできます．
+	ポスターはスペースの制限が大きいので，活用してください．
+	
+	\texttt{tcolorbox}の高さは\texttt{wrapfigure}環境の高さに影響されないようなので，\emph{手動で}指定してください．
+	\end{tcolorbox}
+%%%	
+\end{tcbraster}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth, trim = 50 50 50 50, clip]{test.eps}
+\end{figure}
+
+
+
+
+\end{document}

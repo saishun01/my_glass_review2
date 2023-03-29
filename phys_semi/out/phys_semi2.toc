@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}問題17-1}{1}% 
+\contentsline {subsection}{\numberline {1.1}準備：ネルンストの式}{1}% 
+\contentsline {subsection}{\numberline {1.2}準備：流束とは}{1}% 
+\contentsline {subsection}{\numberline {1.3}問題：ネルンストの式の導出}{2}% 
+\contentsline {subsection}{\numberline {1.4}補足：アインシュタインの関係式}{3}% 
+\contentsline {subsection}{\numberline {1.5}補足：細胞周辺のイオン}{3}% 
+\contentsline {section}{\numberline {2}問題17-5(a)(b)}{4}% 
+\contentsline {subsection}{\numberline {2.1}準備：イオンチャネル}{4}% 
+\contentsline {subsection}{\numberline {2.2}準備：問題の設定}{4}% 
+\contentsline {subsection}{\numberline {2.3}問題：チャネルを透過するイオンの数の見積もり}{5}% 
+\contentsline {subsection}{\numberline {2.4}補足：受動輸送を採用する理由}{5}% 
+\contentsline {section}{\numberline {3}問題17-6(a)}{5}% 
+\contentsline {subsection}{\numberline {3.1}準備：モデルの説明}{6}% 
+\contentsline {subsection}{\numberline {3.2}準備：シミュレーションの際の注意点}{7}% 
+\contentsline {subsection}{\numberline {3.3}問題：PBoC図17.19の再現}{8}% 
+\contentsline {subsection}{\numberline {3.4}補足：全か無かの法則}{10}% 
+\contentsline {section}{\numberline {4}補足：ホジキン-ハクスリー方程式}{10}% 

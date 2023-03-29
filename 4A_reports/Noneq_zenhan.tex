@@ -1,0 +1,214 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+% 数式
+\usepackage{amsmath,amsfonts}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{physics}
+% 画像
+\usepackage[dvipdfmx]{graphicx}
+% ローマ数字
+\usepackage{otf}
+% 単位
+\usepackage{siunitx}
+% 表
+\usepackage{multirow}
+% 化学反応
+\usepackage[version=4]{mhchem}
+
+
+\begin{document}
+
+\title{非平衡科学　前半レポート}
+\author{05-211525　齋藤駿一}
+\date{\today}
+\maketitle
+
+\section{}
+以下の2次元Fokker-Planck方程式（引数は省略した）を考える．
+\begin{align}
+  \partial_t P_{X,Y} &= -\partial_x \left(\nu_X P_{X,Y}\right) - \partial_y \left(\nu_Y P_{X,Y}\right), \label{Pt}\\
+  \nu_X &= \mu F_X - \mu \beta^{-1} \partial_x \ln{P_{X,Y}}, \label{nX}\\
+  \nu_Y &= \mu F_Y - \mu \beta^{-1} \partial_y \ln{P_{X,Y}}. \label{nY}
+\end{align}
+
+\subsection*{1.1}
+平衡とは，任意の場所で確率の流れがゼロとなる定常状態のことである．
+つまり，任意の$(x,y)$について
+\begin{equation}
+  \nu_X(x,y;t) = \nu_Y(x,y;t) = 0 \label{eq}
+\end{equation}
+が成り立つことである．
+
+\subsection*{1.2}
+定常とは，任意の場所で確率分布が時刻によらない状態のことである．
+つまり，任意の$(x,y)$について
+\begin{equation}
+  \partial_t P_{X,Y}(x,y;t) = 0 \label{st}
+\end{equation}
+が成り立つことである．
+
+\subsection*{1.3}
+講義資料によると，Fokker-Planck方程式
+\begin{equation}
+  \partial_t P_X(x;t) = - \partial_x [A^{(1)}(x;t)P_X(x;t)] + \frac{1}{2} \partial_x^2 [A^{(2)}(x;t)P_X(x;t)]
+\end{equation}
+にはLangevin方程式
+\begin{equation}
+  \dv{x}{t} = A^{(1)}(x(t);t) + \sqrt{A^{(2)}(x(t);t)}\cdot \xi(t)
+\end{equation}
+が対応する．
+今回の系はx成分とy成分を独立に扱えるので，それぞれについて上のような対応を考えると，x成分については
+\begin{equation}
+  A^{(1)} = \mu F_X, \qquad A^{(2)} = 2\mu\beta^{-1},
+\end{equation}
+y成分については
+\begin{equation}
+  A^{(1)} = \mu F_Y, \qquad A^{(2)} = 2\mu\beta^{-1}
+\end{equation}
+となる．
+したがって，Fokker-Planck方程式\eqref{Pt}に対応するLangevin方程式は
+\begin{align}
+  \dv{x}{t} &= \mu F_X + \sqrt{2\mu \beta^{-1}} \cdot \xi(t) \label{dxdt}\\
+  \dv{y}{t} &= \mu F_Y + \sqrt{2\mu \beta^{-1}} \cdot \xi(t) \label{dydt}
+\end{align}
+と与えられる．
+
+\subsection*{1.4}
+式\eqref{Pt}に式\eqref{nX}および式\eqref{nY}を代入すると，
+\begin{equation}
+  \partial_t P_{X,Y} = - \mu \partial_x (F_X P_{X,Y}) + \mu \beta^{-1} \partial_x^2 P_{X,Y}  - \mu \partial_y (F_Y P_{X,Y})+ \mu \beta^{-1} \partial_y^2 P_{X,Y}  
+\end{equation}
+が得られる．
+この右辺の第1項はx方向に働く力$F_X$による駆動を表し，第2項はx方向の拡散を表す．
+これらはそれぞれ式\eqref{dxdt}の右辺第1項，第2項に対応する．
+同様に，上式の第3項と第4項は，y方向の駆動と拡散なので，それぞれ\eqref{dydt}の右辺第1項，第2項に対応する．
+
+\subsection*{1.5}
+力を次のように与える．
+\begin{align}
+  F_X &= -\partial_x U(x,y), \\
+  F_Y &= -\partial_y U(x,y), \\
+  U(x,y) &= \frac{k}{2}\left(x^2+y^2\right).
+\end{align}
+このとき，
+\begin{align}
+  \nu_X &= - \mu \partial_x \left(U(x,y)+ \beta^{-1} \ln{P_{X,Y}(x,y;t)}\right),\\
+  \nu_Y &= - \mu \partial_y \left(U(x,y)+ \beta^{-1} \ln{P_{X,Y}(x,y;t)}\right),
+\end{align}
+となるので，平衡の条件\eqref{eq}から，平衡分布$P_{X,Y}^{\mathrm{eq}}$に対して
+\begin{equation}
+  \partial_x \left(U(x,y)+ \beta^{-1} \ln{P_{X,Y}^{\mathrm{eq}}(x,y)}\right) = \partial_y \left(U(x,y)+ \beta^{-1} \ln{P_{X,Y}^{\mathrm{eq}}(x,y)}\right) = 0
+\end{equation}
+が成り立つ．
+よって，$U+\beta^{-1}\ln{P_{X,Y}^{\mathrm{eq}}}$は$(x,y,t)$のいずれにもよらない関数となるので，
+\begin{equation}
+  U(x,y)+ \beta^{-1} \ln{P_{X,Y}^{\mathrm{eq}}(x,y)} = \mathrm{const.} =: c 
+\end{equation}
+となる．
+したがって，
+\begin{equation}
+  P_{X,Y}^{\mathrm{eq}}(x,y) = e^c e^{-\beta U(x,y)}
+\end{equation}
+が成り立つ．
+この両辺を$x,y$について積分すると，規格化条件より，
+\begin{align}
+  1 &= e^c \int \dd{x} \int \dd{y} e^{-\beta U(x,y)} \notag \\
+  \therefore e^c &= \left[\int \dd{x} \int \dd{y} e^{-\beta U(x,y)} \right]^{-1}
+\end{align}
+となる．
+具体的な$U$の表式を代入して計算すると，
+\begin{equation}
+  \int \dd{x} \int \dd{y} e^{-\beta U(x,y)} = \frac{2\pi}{\beta k}
+\end{equation}
+となるので，
+\begin{equation}
+  e^c = \frac{\beta k}{2\pi}
+\end{equation}
+が分かる．
+よって，平衡分布は
+\begin{equation}
+  P_{X,Y}^{\mathrm{eq}}(x,y) = \frac{\beta k}{2\pi} e^{-\frac{\beta k}{2}\left(x^2+y^2\right)}
+\end{equation}
+と求まる．
+
+\subsection*{1.6}
+解けなかったが，分かったところまで書く．
+
+定常分布を$P_{X,Y}^{\mathrm{st}}$とおき，さらに
+\begin{align}
+  \nu_X^{\mathrm{st}} &:= \mu F_X - \beta^{-1}\partial_x \ln{P_{X,Y}^{\mathrm{st}}} = \mu (-kx+ay) - \mu\beta^{-1}\partial_x \ln{P_{X,Y}^{\mathrm{st}}} \\
+  \nu_Y^{\mathrm{st}} &:= \mu F_Y - \beta^{-1}\partial_y \ln{P_{X,Y}^{\mathrm{st}}} = \mu (-ax-ky) - \mu\beta^{-1}\partial_y \ln{P_{X,Y}^{\mathrm{st}}}
+\end{align}
+とおくと，
+\begin{equation}
+  \partial_x(\nu_X^{\mathrm{st}} P_{X,Y}^{\mathrm{st}}) + \partial_x(\nu_X^{\mathrm{st}} P_{X,Y}^{\mathrm{st}}) = 0
+\end{equation}
+が成り立つ．
+代入して整理すると，
+\begin{equation}
+  (\partial_x^2 + \beta kx\partial_x) P_{X,Y}^{\mathrm{st}} +(\partial_y^2 + \beta ky\partial_y) P_{X,Y}^{\mathrm{st}}= -2\beta k P_{X,Y}^{\mathrm{st}} - \beta a(x\partial_y - y\partial_x)P_{X,Y}^{\mathrm{st}}
+\end{equation}
+となる．
+ここで，関数$F(x,y)$を
+\begin{equation}
+  P_{X,Y}^{\mathrm{st}} = e^{-\frac{\beta k}{2} (x^2+y^2)} F(x,y)
+\end{equation}
+とおいて，上式を整理すると，
+\begin{equation}
+  (\partial_x^2 + \partial_y^2) F(x,y) = - \beta a(x\partial_y - y\partial_x) F(x,y)
+\end{equation}
+が得られる．
+さらに，直交座標$(x,y)$の代わりに極座標$(r,\theta)$を用いると，
+\begin{equation}
+  F(r,\theta) := F(x=r\cos{\theta}, y=r\sin{\theta})
+\end{equation}
+として，
+\begin{equation}
+  \left(\partial_r^2 + \frac{1}{r}\partial_r + \frac{1}{r^2}\partial_{\theta}^2\right) F(r,\theta) = - \beta a\partial_{\theta} F(r,\theta)
+\end{equation}
+が分かる．
+これを変数分離して解こうとしたがうまくいかなかった．
+
+問題の解答にはならないが，確率の非負性を満たさない定常分布は次のように求まった．
+問題を簡単にするため
+\begin{equation}
+  \partial_{\theta} F(r,\theta) = 0
+\end{equation}
+と仮定すると，
+\begin{equation}
+  \left(\partial_r^2 + \frac{1}{r}\partial_r \right) F(r,\theta) = 0
+\end{equation}
+となる．
+この解は任意定数$c$を用いて
+\begin{equation}
+  F(r,\theta) = c \ln{r}
+\end{equation}
+と書ける．
+したがって，
+\begin{equation}
+  P_{X,Y}^{\mathrm{st}} = c e^{-\frac{\beta kr^2}{2}}\ln{r} 
+\end{equation}
+と書ける．
+これは確率の非負性を満たさないが，規格化条件を満たすように$c$を
+\begin{equation}
+  c= \left[\int_0^{\infty} e^{-\frac{\beta kr^2}{2}}\ln{r} \cdot 4\pi r^2 \dd{r}\right]^{-1}
+\end{equation}
+ととることはできる．
+この積分は，$u=\beta k r^2/2$と変数変換し，積分の公式を用いると，
+\begin{align}
+  \int_0^{\infty} e^{-\frac{\beta kr^2}{2}}\ln{r} \cdot 4\pi r^2 \dd{r} 
+  &= \frac{2\sqrt{2}\pi}{(\beta k)^{3/2}} \left[\ln{\frac{2}{\beta k}}\cdot\int_0^{\infty} u^{1/2}e^{-u} \dd{u} + \int_0^{\infty} u^{1/2} e^{-u} \ln{u} \dd{u} \right] \notag\\
+  &= \frac{2\sqrt{2}\pi}{(\beta k)^{3/2}} \left[\frac{\sqrt{\pi}}{2}\ln{\frac{2}{\beta k}} + \frac{\sqrt{\pi}}{2} (2 -\gamma - \ln{4}) \right] \notag\\
+  &= \sqrt{\frac{2\pi^3}{(\beta k)^3}} \left[2 -\gamma - \ln{(2\beta k)} \right]
+\end{align}
+と書き直せる\footnote{実際にはWolfram Alphaを用いた．}．
+ただし，$\gamma$はオイラー定数である．
+以上より，確率の非負性を満たさない定常分布
+\begin{equation}
+  P_{X,Y}^{\mathrm{st}} = \frac{1}{2 -\gamma - \ln{(2\beta k)}}\sqrt{\frac{(\beta k)^3}{2\pi^3}}  e^{-\frac{\beta k}{2}(x^2+y^2)}\ln{\sqrt{x^2+y^2}} 
+\end{equation}
+が得られる．
+
+\end{document}

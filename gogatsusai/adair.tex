@@ -1,0 +1,79 @@
+\section{Adairの式}
+Hillの式を導くにあたって仮定した状況は，リガンドが$n$個のサイトに同時に結合し，同時に乖離するというものだった．
+しかし，実際にはリガンドは1個ずつサイトを埋めていくはずである．
+その場合，リガンドが一部のサイトにだけ結合した受容体というものも現れることになる，
+ここではそのような状況を扱う．
+
+受容体Yが$n$個の結合サイトを持ち，そこにリガンドXが1つずつ結合していく過程を考える．
+このとき，化学反応式は次のようになる：
+\begin{align*}
+  \ce{X + Y &<=>[$k$_{on,1}][$k$_{off,1}] XY} \\
+  \ce{X + XY &<=>[$k$_{on,2}][$k$_{off,2}] X2Y} \\
+  &\vdots\\
+  \ce{X + X_{$n-1$}Y &<=>[$k$_{on,$n$}][$k$_{off,$n$}] X_{$n$}Y} 
+\end{align*}
+この反応のレート方程式は，
+\begin{align*}
+  \dv{t}[\ce{XY}] &= k_{\mathrm{on},1}[\ce{X}][\ce{Y}] - k_{\mathrm{off},1}[\ce{XY}] \\
+  \dv{t}[\ce{X2Y}] &= k_{\mathrm{on},2}[\ce{X}][\ce{XY}] - k_{\mathrm{off},2}[\ce{X2Y}] \\
+  &\vdots\\
+  \dv{t}[\ce{X_{$n$}Y}] &= k_{\mathrm{on},n}[\ce{X}][\ce{X_{$n-1$}Y}] - k_{\mathrm{off},n}[\ce{X_{$n$}Y}]
+\end{align*}
+で与えられる．
+定常状態ではどの物質の濃度も変化しなくなるので，上式の左辺はどれも0となる．
+したがって，$i=1,2,\cdots,n$に対して会合定数$K_i$を
+\begin{equation}
+  K_i = \frac{k_{\mathrm{on}}}{k_{\mathrm{off}}}
+\end{equation}
+とおくと，
+\begin{equation}
+  \frac{[\ce{XY}]}{[\ce{X}][\ce{Y}]} = K_1, \qquad \frac{[\ce{X2Y}]}{[\ce{X}][\ce{XY}]} = K_2, \qquad\cdots,\qquad \frac{[\ce{X_{$n$}Y}]}{[\ce{X}][\ce{X_{$n-1$}Y}]} = K_n
+\end{equation}
+がいえる．
+これらを辺々掛け合わせると，$j=1,2,\cdots, n$に対して
+\begin{equation}
+  \frac{[\ce{X_{$k$}Y}]}{[\ce{X}]^j[\ce{Y}]} = \prod_{i=1}^{j} K_i
+\end{equation}
+を得る．
+これより，Y全体の濃度は
+\begin{equation}
+  [\ce{Y_{total}}] = [\ce{Y}] + [\ce{XY}] + \cdots + [\ce{X_{$n$}Y}] = \sum_{j=0}^{n} \qty(\prod_{i=1}^{j} K_i )[\ce{X}]^j[\ce{Y}] 
+\end{equation}
+であり，Yの結合サイトの総数はこれを用いて$n[\ce{Y}]_{\mathrm{total}}$となる．
+一方，Yに結合しているXの総数は
+\begin{equation}
+  [\ce{X_{bind}}] = 0[\ce{X}] +  1[\ce{XY}] + \cdots + n[\ce{X_{$n$}Y}] = \sum_{j=0}^{n} j\qty(\prod_{i=1}^{j} K_i )[\ce{X}]^j[\ce{Y}] 
+\end{equation}
+なので，Yの結合サイトの占有率は
+\begin{equation}
+  p = \frac{[\ce{X_{bind}}]}{n[\ce{Y_{total}}]} = \frac{\sum_{j=0}^{n} k\qty(\prod_{i=1}^{j} K_i )[\ce{X}]^j[\ce{Y}] }{\sum_{j=0}^{n} \qty(\prod_{i=1}^{j} K_i )[\ce{X}]^j[\ce{Y}] } = \frac{\sum_{j=0}^{n} j\qty(\prod_{i=1}^{j} K_i )[\ce{X}]^j }{\sum_{j=0}^{n} \qty(\prod_{i=1}^{j} K_i )[\ce{X}]^j }
+  \label{adair}
+\end{equation}
+となる．
+これはAdair（アデア）の式と呼ばれる．
+
+\section{Adairの式から見たHillの式}
+この結果を踏まえて，Hillの式を捉え直そう．
+Hillの式で用いた仮定は，中間体$\ce{XY}，\ce{X_2,Y}\cdots\ce{X_{$n-1$}Y}$が無視できるというものであるため，Adairの式で言うところの
+\begin{equation}
+  K_1 \ll 1, \qquad K_n \gg 1 \,(K_1K_n \sim 1) \label{adair_hill}
+\end{equation}
+という状況に対応している．
+このとき$j=1,2, \cdots, n-1$に対しては
+\begin{equation}
+  \prod_{i=1}^{j} K_i \ll 1
+\end{equation}
+だが，$j=n$に対しては積はそれなりに大きくなるので，何らかのパラメータ$K_d$を用いて
+\begin{equation}
+  \prod_{i=1}^{n} K_i = \frac{1}{K_d^n}
+\end{equation}
+と書ける．
+これより，式\eqref{adair}は
+\begin{equation}
+  p \approx \frac{[\ce{X}]^n/K_d^n}{1+[\ce{X}]^n/K_d^n} = \frac{[\ce{X}]^n}{K_d^n + [\ce{X}]^n}
+\end{equation}
+となってHillの式が再現する．
+逆に，Adairの式で各反応の会合定数$K_i$を動かし，式\eqref{adair_hill}を破るようにすると，Hillの式では見られなかった振る舞いが出てくる．
+
+もう少し直観的な形で言い換えれば，Hillの式を導く仮定は，受容体にリガンドが一つでも結合すると，受容体の状態が変わり，一気にリガンドを結合しやすくなる，という状況に対応している．
+このように，受容体にいくつも結合する場所があることをアロステリックという．

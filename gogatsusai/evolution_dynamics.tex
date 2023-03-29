@@ -1,0 +1,50 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+% 数式
+\usepackage{amsmath,amsfonts,mathtools}
+\usepackage{amssymb,latexsym}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{physics}
+% 画像
+\usepackage[dvipdfmx]{graphicx}
+% ローマ数字
+\usepackage{otf}
+% 単位
+\usepackage{siunitx}
+% 表
+\usepackage{multirow}
+
+\usepackage{url}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{dfn}{定義}
+
+\begin{document}
+
+\title{生物進化とゲーム理論}
+\author{生物物理班　齋藤駿一}
+\date{\today}
+\maketitle
+
+\tableofcontents
+
+\input{evo_intro.tex}
+
+\input{evo_game.tex}
+
+\input{evo_pip.tex}
+
+\input{evo.conclu.tex}
+
+\begin{thebibliography}{99}
+  \bibitem{text} 山内淳．『進化生態学入門---数式で見る生物進化---』．共立出版，2012．
+  \bibitem{game} 岡田章．『ゲーム理論第3版』．有斐閣，2021．
+  \bibitem{jsmb} 大槻久．『数理の道具箱　Adaptive Dynamics入門（４）～進化的特異点の分類とPIP～』．日本数理生物学会JSMB News Letter No.82，pp.29-34，2017．
+  \bibitem{geritz} Geritz, S. A. H., Kisdi, \'E., Mesz\'ena, G. and Metz, J. A. J. Evolutionarily singular strategies and the adaptive growth and branching of the evolutionary tree. \textit{Evolutionary Ecology} \textbf{12}: 35–57, 1998. \\
+  \url{https://doi.org/10.1023/A:1006554906681}
+\end{thebibliography}
+
+\end{document}

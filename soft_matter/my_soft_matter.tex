@@ -1,0 +1,505 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+% 数式
+\usepackage{amsmath,amsfonts}
+\usepackage{bm}
+\usepackage{physics}
+% 画像
+\usepackage[dvipdfmx]{graphicx}
+% ローマ数字
+\usepackage{otf}
+% 単位
+\usepackage{siunitx}
+% 表
+\usepackage{multirow}
+% 化学反応
+\usepackage[version=4]{mhchem}
+
+
+\begin{document}
+
+\title{ソフトマター物理学}
+\author{齋藤駿一}
+\date{\today}
+\maketitle
+
+\tableofcontents
+
+\section{静力学}
+自然な変数が固定されるように，系の熱力学関数（自由エネルギー）$U$をとる．
+このとき，平衡状態として実現するのは，$U$を最小化する状態である．
+
+\subsection{Laplace圧の導出}
+縁が固定された膜を考える．
+この膜の上部の圧力は$p_0$，下部の圧力は$p_0+p$とする．
+また，膜の自由エネルギーは，表面積に比例して増大すると仮定する．
+このとき，膜の形状$z=f(u,v)$はどうなるかという問題を考える．
+以下，
+\begin{equation}
+  f_u = \pdv{f}{u},\qquad f_{uu} = \pdv[2]{f}{u},\qquad f_{uv} = \pdv{f}{u}{v}
+\end{equation}
+などと略記する．
+
+膜の自由エネルギーは，
+\begin{equation}
+  U = \int \dd{u} \dd{v} \left(\gamma \sqrt{1+f_u^2 + f_v^2} - pf\right)
+\end{equation}
+という形になる．
+これを$f$に関して変分すると，
+\begin{align}
+  \delta U &= \int \dd{u} \dd{v} \left(\gamma \delta\sqrt{1+f_u^2 +f_v^2} - p\delta f\right) \notag\\
+  &= \int \dd{u} \dd{v} \left(\gamma \frac{f_u\delta f_u + f_v \delta f_v}{\sqrt{1+f_u^2 + f_v^2}} - p\delta f\right) \notag\\
+  &= \int \dd{u} \dd{v} \left(\gamma \frac{f_u(\delta f)_u + f_v (\delta f)_v}{\sqrt{1+f_u^2 + f_v^2}} - p\delta f\right)
+\end{align}
+となる．
+そこで，部分積分を行い，境界で$\delta f = 0$であることを用いると，
+\begin{align}
+  \delta U &= -\int \dd{u} \dd{v} \left(\gamma \pdv{u}\frac{f_u}{\sqrt{1+f_u^2+ f_v^2}} + \gamma \pdv{v}\frac{f_v}{\sqrt{1+f_u^2 + f_v^2}} + p\right)\delta f\\
+  &= - \int \dd{u} \dd{v} \left(\gamma \frac{f_{uu}(1+f_v^2) + f_{vv}(1+f_u^2)-2f_uf_vf_{uv}}{(1+f_u^2+f_v^2)^{3/2}} + p\right)\delta f
+\end{align}
+を得る．
+したがって，変分原理$\delta U = 0$より，
+\begin{equation}
+  p = - \gamma \frac{f_{uu}(1+f_v^2) + f_{vv}(1+f_u^2)-2f_uf_vf_{uv}}{(1+f_u^2+f_v^2)^{3/2}} 
+\end{equation}
+が成り立つ．
+
+次に，この右辺の直観的意味を考える．
+結論から言えば，これは膜曲面の平均曲率の$-2\gamma$倍である．
+一般に曲面$\vectorbold{p}(u,v)$は，
+第1形式
+\begin{equation}
+  \dd{\vectorbold{p}}\vdot\dd{\vectorbold{p}} = E \dd{u}\dd{u} + 2F\dd{u}\dd{v} + G \dd{v}\dd{v}
+\end{equation}
+および，単位法線ベクトル$\vectorbold{n}(u,v)$を用いた第2形式
+\begin{equation}
+  -\dd{\vectorbold{n}}\vdot\dd{\vectorbold{p}} =  L\dd{u}\dd{u} + 2M\dd{u}\dd{v} + N \dd{v}\dd{v}
+\end{equation}
+で特徴づけられ，平均曲率は
+\begin{equation}
+  H = \frac{EN + LG - 2MF}{2(EG-F^2)}
+\end{equation}
+で与えられる．
+今回の問題では，
+\begin{equation}
+  \vectorbold{p} = 
+  \left(
+    \begin{array}{c}
+      u \\
+      v \\
+      f(u,v)
+    \end{array}
+  \right)
+  ,\qquad 
+  \vectorbold{n} = \frac{1}{\sqrt{1+f_u^2+f_v^2}}
+  \left(
+    \begin{array}{c}
+      -f_u \\
+      -f_v \\
+      1
+    \end{array}
+  \right)
+\end{equation}
+となるので，具体的な計算により
+\begin{equation}
+  H = \frac{f_{uu}(1+f_v^2) + f_{vv}(1+f_u^2)-2f_uf_vf_{uv}}{2(1+f_u^2+f_v^2)^{3/2}}
+\end{equation}
+を得る．
+したがって，
+\begin{equation}
+  p = -2\gamma H = -\gamma \left(\frac{1}{R_1} + \frac{1}{R_2}\right)
+\end{equation}
+となる．
+ただし，$R_1,R_2$はこの曲面の主曲率半径である，
+
+今回は圧力を最初に与えたが，この結果は逆に，曲がった曲面の内外で圧力差があることを示唆する．
+この圧力は，Laplace圧という名で知られる．
+たとえば，もし膜が上に凸であれば，$H<0$より$p>0$を得る．
+
+この議論は，膜が閉曲面をなすときにも成立する．
+その場合，$p$は膜の内側に現れる余剰の圧力と考えることができる．
+また，この議論をもとに，以下ではしばしば
+\begin{equation}
+  \delta \int \dd{u} \dd{v} \sqrt{1+f_u^2 + f_v^2} = - \int \dd{u} \dd{v} 2H\delta f = - \int \dd{u} \dd{v} \left(\frac{1}{R_1} + \frac{1}{R_2}\right) \delta f
+\end{equation}
+という公式を用いる．
+これは変分において境界の寄与が無視できるとき正しい．
+
+\subsection{濡れ性}
+具体的に，固体表面に液滴を載せることを考える．
+固体表面は液体かそれ以外（気体）と接しており，それぞれの界面では単位面積あたり$\gamma_{SL}, \gamma_{SO}$の自由エネルギー増大があると考える．
+
+平衡状態として，大きく2通りの可能性がある．
+すなわち，固体表面がすべて液体で覆われるか，気体と接する部分が残っているかである．
+前者を不完全な濡れ，後者を完全な濡れと呼んで区別する．
+
+まずは不完全な濡れを考える．
+とくに，固体・液体・気体が同時に接する点（三重点）に注目する．
+固体表面に対する液面の角度（接触角）を$\theta_E$とする．
+ここで，固体表面上で液体・気体と接している部分の面積をそれぞれ$A_{SL}, A_{SO}$とおき，液体と気体の接している部分の面積を$A$とおく．
+平衡状態では，
+\begin{equation}
+  \gamma_{SL} \dd{A_{SL}} + \gamma_{SO}\dd{A_{SO}} + \gamma \dd{A} = 0
+\end{equation}
+が成り立つ．
+固体表面の総面積を一定と考えて
+\begin{equation}
+  \dd{A_{SO}} = - \dd{A_{SL}}
+\end{equation}
+とし，
+三重点近傍では液面は平面で近似できると考えられるので，
+\begin{equation}
+  \dd{A} \cos{\theta_E} = \dd{A_{SL}}
+\end{equation}
+が成り立つとすれば，
+\begin{equation}
+  \left(\gamma_{SL} - \gamma_{SO}+ \gamma \cos{\theta_E} \right)\dd{A_{SL}}  = 0
+\end{equation}
+がいえる．
+したがって，Youngの公式
+\begin{equation}
+  \gamma_{SL} - \gamma_{SO}+ \gamma \cos{\theta_E} = 0
+\end{equation}
+が導かれる．
+このことから，$\theta_E$が定義できる，つまり不完全な濡れが実現する条件として
+\begin{equation}
+  S = \gamma_{SO} - \gamma_{SL} - \gamma < 0
+\end{equation}
+が分かる．
+ここで定義した$S$を浸透係数と呼ぶ．
+逆に
+\begin{equation}
+  S = \gamma_{SO} - \gamma_{SL} - \gamma > 0
+\end{equation}
+のとき，いかなる$\theta_E$でも平衡に至らないため，完全な濡れが実現する．
+
+\subsection{毛管長}
+無限に大きい固体の板を液体内に置くと，液体が固体表面を濡らすことで，固体表面近傍で液面が湾曲する．
+いま，固体表面から十分遠いところでの液面と同じ高さの固体表面上の点を原点として，固体表面に垂直に$x$軸，鉛直上向きに$z$軸をとる．
+このとき，液面は$x$座標のみに依存して$z=z(x)$と書ける．
+今回，$z_{x} \ll 1$とすれば，平均曲率は
+\begin{equation}
+  H = \frac{z_{xx}}{2(1+z_x^2)^{3/2}} \approx \frac{z_{xx}}{2}
+\end{equation}
+となる．
+よって，自由エネルギー
+\begin{equation}
+  U = \int \dd{x} \left(\gamma \sqrt{1+z_x(x)^2} + \frac{1}{2} \rho g z(x)^2 \right)
+\end{equation}
+を$z$で変分することで，
+\begin{align}
+  \delta U &= \int \dd{x} \left(-2\gamma H + \rho g z(x) \right)\delta z \notag\\
+  &\approx \int \dd{x} \left(-\gamma z_{xx}(x) + \rho g z(x) \right)\delta z
+\end{align}
+が得られ，これより
+\begin{equation}
+  \gamma z_{xx} = \rho g z
+\end{equation}
+がいえる．
+ここで，毛管長
+\begin{equation}
+  \kappa^{-1} = \sqrt{\frac{\gamma}{\rho g}}
+\end{equation}
+を用いれば，
+\begin{equation}
+  z(x) = z(0)e^{-x/\kappa^{-1}}
+\end{equation}
+が分かり，表面張力の寄与（湾曲）は$x\gg \kappa^{-1}$では重力にかき消されて無視できることが分かる．
+
+\subsection{毛管現象}
+本節では，毛管長$\kappa^{-1}$よりも十分大きな空間スケールを考えて，表面張力による液面の湾曲などを無視する．
+
+まず，固体表面を水平に置き，その上に液滴を置くことを考える．
+液滴が毛管長より十分大きければ，液滴の縁の湾曲は無視でき，滴は一定の厚み$e$を持って面積$A$を占めると考えることができる．
+このとき，浸透係数$S$を用いて，自由エネルギーは
+\begin{equation}
+  U = - SA + \frac{1}{2} \rho g e^2 A
+\end{equation}
+と書ける．
+これを，滴の体積$V=eA$を保って$e$について変分すると，
+\begin{equation}
+  \delta U = \delta \left(- S\frac{V}{e} + \frac{1}{2} \rho g e V \right)= \left( \frac{S}{e^2} + \frac{1}{2} \rho g  \right)V\delta e
+\end{equation}
+より，
+\begin{equation}
+  S = -\frac{1}{2}\rho g e^2
+\end{equation}
+がいえる．
+これは，不完全な濡れ$S<0$が実現することを含意しており，その場合には接触角$\theta_E$を用いて
+\begin{equation}
+  S = \gamma_{SO} - \gamma_{SL} - \gamma = -\gamma\left(1-\cos{\theta_E}\right)
+\end{equation}
+と書ける．
+よって，
+\begin{equation}
+  e = \kappa^{-1}\sqrt{2(1-\cos{\theta_E})} = 2\kappa^{-1}\sin{\frac{\theta_E}{2}}
+\end{equation}
+が成り立つ．
+
+次に，固体の毛管を液面に突き刺す．
+すると，液体は毛管を上昇する．
+毛管の半径を$R$，水面を基準とする液柱の高さを$h$とおくと，自由エネルギーは
+\begin{equation}
+  U = -2\pi R hI + \frac{1}{2}\pi R^2 h^2 \rho g
+\end{equation}
+と書ける．
+ただし，
+\begin{equation}
+  I = \gamma_{SO} - \gamma_{SL}
+\end{equation}
+とおいた．（これは浸透係数と呼ばれる．）
+このとき，$U$を$h$で変分すると，
+\begin{equation}
+  \delta U = \left(-2\pi R I + \pi R^2 \rho g h\right)\delta h
+\end{equation}
+となるので，
+\begin{equation}
+  h = \frac{2I}{\rho g R}
+\end{equation}
+が分かる．
+とくに，不完全な濡れを仮定すると，
+\begin{equation}
+  I = \gamma \cos{\theta_E}
+\end{equation}
+より，
+\begin{equation}
+  h = \frac{2\kappa^{-2}\cos{\theta_E}}{R}
+\end{equation}
+が成り立つ．
+これをJurinの高さという．
+このことから，
+\begin{equation}
+  h \le \frac{2\kappa^{-2}}{R}
+\end{equation}
+が結論できる．
+
+一方で完全な濡れの場合，この限界を超えられそうに見える．
+しかし実際には，毛管に薄い薄膜（濡れ薄膜）が形成され，$h$はこの限界程度に抑えられる．
+
+\subsection{薄い薄膜}
+固体表面上の液体が薄膜を形成する状況を考える．
+薄膜の厚み$e$が極めて小さいとき，単位面積あたりの界面エネルギーは，薄膜が存在しない場合の$\gamma_{SO}$と薄膜が十分厚い場合の$\gamma_{SL}+\gamma$の中間の値をとると考えられる．
+よって，薄膜の面積を$A$，厚みを$e$としたとき，界面エネルギーは，
+\begin{equation}
+  U = \left(\gamma_{SL} + \gamma + P(e)\right)A
+\end{equation}
+と書ける．
+ただし，
+\begin{equation}
+  P(e)
+  \begin{cases}
+    \to 0 & \left(e \to \infty\right)\\
+    \to S & \left(e \to 0\right) 
+  \end{cases}
+\end{equation}
+である．
+薄膜の体積$V=Ae$を一定に保ってこの界面エネルギーを変分すると，
+\begin{align}
+  \delta U &= \delta \left(\gamma_{SL} + \gamma + P(e)\right)\frac{V}{e} \notag\\
+  &= -\left(\gamma_{SL} + \gamma + P(e)\right)\frac{V}{e^2}\delta e + \dv{P(e)}{e}\frac{V}{e}\delta e \notag\\
+  &= -\left(\gamma_{SL} + \gamma + P(e) -e\dv{P(e)}{e}\right)\frac{V}{e^2}\delta e \notag\\
+  &= \left(\gamma_{SL} + \gamma + P(e) -e\dv{P(e)}{e}\right)\delta A
+\end{align}
+つまり，薄膜の表面張力は，
+\begin{equation}
+  \gamma_{\mathrm{film}} = \gamma_{SL} + \gamma + P(e) + e\Pi(e)
+\end{equation}
+と書ける．ただし，
+\begin{equation}
+  \Pi(e) = - \dv{P(e)}{e}
+\end{equation}
+とおいた．
+これを分離圧と呼ぶ．
+
+界面エネルギー$U(e)$の形状，すなわち$P(e)$の形状によって，どの厚み$e$が安定か，またどの$e$の組み合わせが共存できるかが分かる．
+厚み$e_1$と$e_2$の液滴が共存する条件は，端的に言えば$P(e)$のグラフに，2点$(e_1,P(e_1))$，$(e_2,P(e_2))$を通る共通接線を引けることである．
+実際，このとき確かに薄膜間で表面張力$\gamma_{\mathrm{film}}$が釣り合う．
+この議論の延長で，完全な濡れでも形成される薄膜（クレープ，濡れ薄膜）や，不完全な濡れでの$e=0$と滴$e=\infty$の共存が説明できる．
+
+\subsection{撥水}
+前節で扱った薄膜の自由エネルギーに重力の寄与を取り入れると，
+\begin{equation}
+  U(e)/A = \gamma_{SL} + \gamma + P(e) + \frac{1}{2}\rho g e^2
+\end{equation}
+となる．
+$P(e)$は重力項が効いてこないほど小さい$e$で効き，$e=0$で$U/A=\gamma_{SO}$とするように働くと考える．
+とくに不完全な濡れの場合，$e\to 0$で$P(e)\to S < 0$なので，$U(e)$の形状は（大雑把に）$e$の大きいところで下に凸となり，$e$の小さいところで上に凸となり得る．
+したがって，この場合に裸の固体表面$e=0$と薄膜の共存を考えると，$e$の小さい薄い薄膜は自発的に撥水（スピノーダル撥水）し，$e$の大きい厚い薄膜は核形成によって撥水（核の生成・成長型撥水）し，非常に大きい$e$をもつ薄膜（滴）は安定して存在することが分かる．
+
+\section{動力学}
+\subsection{一般的な仮定}
+ゆっくりと緩和する量の集まり$X=(X_1,\cdots,X_n)$を考え，自由エネルギー$U$がそれに依存すると仮定する．
+ダイナミクスとして
+\begin{equation}
+  \dv{X_i}{t} = -\sum_{j} \mu_{ij}(X) \pdv{U}{X_j}
+\end{equation}
+を仮定する．
+さらに，行列$\mu$が正定値対称であることを仮定する．とくに，Onsagaerの相反定理
+\begin{equation}
+  \mu_{ij} = \mu_{ji}
+\end{equation}
+を仮定する．
+このとき，$\mu$の逆行列を$\zeta$とおく．
+
+\subsection{Onsagarの変分原理}
+前節の仮定が成り立つとき，実現する運動は，次の量を$V_i=\dv{X_i}{t}$について最小化するものである．
+\begin{equation}
+  R = \frac{1}{2}W + \dot{U}
+\end{equation}
+ただし，
+\begin{align}
+  W &= \sum_{i,j} \zeta_{ij} V_i V_j \\
+  \dot{U} &= \sum_{i} V_i \pdv{U}{X_i}
+\end{align}
+とした．
+
+\subsection{連続化Onsagarの変分原理}
+パラメータ$X$が確率的に分布する場合（たとえば，パラメータ$X$を有する粒子が複数存在するような系）を考える．
+このとき，$X$の分布関数を連続関数$\psi(X,t)$とする．
+この場合，$X$の速度場$V(X,t)$を考えることができる．
+連続の式より，
+\begin{equation}
+  \pdv{\psi(X,t)}{t} = -\pdv{X} V(X,t)\psi(X,t) 
+\end{equation}
+が成り立つ．
+また，系の自由エネルギーを
+\begin{equation}
+  U = \int \dd{X} N\psi(X,t) u(X)
+\end{equation}
+という形に表す．
+このとき，系を構成する（パラメータ$X$が対応する）粒子の数を$N$として，
+\begin{align}
+  W &= \int \dd{X} N\psi(X,t) \sum_{i,j} \zeta_{ij}(X) V_{i} V_{j} \\
+  \dot{U} &= \int \dd{X} N\pdv{\psi(X,t)}{t} u(X) 
+\end{align}
+とすれば，Onsagarの変分原理として
+\begin{equation}
+  \delta R[V] = \delta \left( \frac{1}{2} W + \dot{U}\right) = 0
+\end{equation}
+が成り立つ．
+
+このとき，
+\begin{align}
+  \delta R[V] &= \delta \left( \frac{1}{2} W + \dot{U}\right) \notag\\
+  &= \int \dd{X} \left(N\psi(X,t) \sum_{i,j} \zeta_{ij}(X) V_{i} \delta V_{j} 
+  -  N u(X) \sum_{j} \pdv{X_j} \delta V_j(X,t) \psi(X,t)
+  \right) \notag \\
+  &= \int \dd{X} \left(N\psi(X,t) \sum_{i,j} \zeta_{ij}(X) V_{i} \delta V_{j} 
+  + N \sum_{j} \pdv{u(X)}{X_j} \delta V_j(X,t) \psi(X,t)
+  \right) \notag \\
+  &=\int \dd{X} N\psi(X,t) \sum_{j}\left( \sum_{i} \zeta_{ij}(X) V_{i} 
+  + \pdv{u(X)}{X_j} \right) \delta V_j(X,t) 
+\end{align}
+より，
+\begin{equation}
+  \sum_{i} \zeta_{ij}(X) V_{i} 
+  + \pdv{u(X)}{X_j} = 0
+\end{equation}
+すなわち
+\begin{equation}
+  V_{i} = - \sum_{j} \mu_{ij}(X) \pdv{u(X)}{X_j}
+\end{equation}
+を確認できる．
+
+\subsection{その他の項}
+変分原理に新たな項を付け加えることで，さらに多彩な物理を表現することができる．
+
+たとえば，パラメータ$X,V$がある条件$g(X,V)=0$に拘束される場合，
+\begin{align}
+  \tilde{R} &= R - \lambda(X) g(X,V) \\
+  \tilde{R} &= R - \int \dd{X} \lambda(X) g(X,V)
+\end{align}
+を$R$の代わりに用いれば良い（Lagrangeの未定乗数法）\footnote{未定乗数は$V$には依存しないと考え，未定乗数の変分は考えない．}．
+ただしこの場合，最終的に意味のある方程式を得るには，未定乗数$\lambda$をその他のパラメータを用いて表す必要がある．
+
+ほかにも，系が温度$T$の熱浴と接しており，常に熱ゆらぎを受ける場合，自由エネルギーとしてHelmholz自由エネルギー$F$をとるのが適切である．
+これは，エントロピー$S$を用いて
+\begin{equation}
+  F = U - TS
+\end{equation}
+と書ける量である．
+$X$が確率的に分布するとき，
+\begin{equation}
+  S = - Nk_B\int \dd{X} \psi(X,t) \log{\psi(X,t)}
+\end{equation}
+と考えられるので，$\dot{U}$のかわりに
+\begin{align}
+  \dot{F} &= \dot{U} - T\dot{S} \notag\\
+  &= \int \dd{X} N\pdv{\psi}{t} \left(u(X)+k_B T\left(1 + \log{\psi(X,t)}\right) \right) \notag \\
+  &= \int \dd{X} N\pdv{\psi}{t} \left(u(X)+k_B T\log{\psi(X,t)}\right)
+\end{align}
+を用いれば良い．
+ただし，この変形の最後に規格化条件
+\begin{equation}
+  \int \dd{X} \psi(X,t) = 1
+\end{equation}
+から，
+\begin{equation}
+  \dv{t}\int \dd{X} \psi(X,t) = \int \dd{X} \pdv{\psi(X,t)}{t} = 0
+\end{equation}
+であることを用いた．
+
+また，パラメータ$X$を空間座標とみなし，$\psi$の勾配に応じた界面エネルギーを考えたければ，たとえば$U$に
+\begin{equation}
+  U_S = \int \dd{X} \frac{N\kappa_S}{2} \left(\pdv{\psi(X,t)}{X}\right)^2
+\end{equation}
+を加えれば良い\footnote{$N$は計算結果を簡単にするために便宜的につけた．$N\psi$を掛けないのは，界面エネルギーとはそもそも，$N$が極めて大きい状況で分布$\psi$が急激に変化する部分にもたらされるものであり，各粒子に割り当てられるものではないためである．}．
+
+\subsection{熱ゆらぎがある状況の一般論}
+Onsagarの変分原理は，
+\begin{equation}
+  \delta R = \delta \left(\frac{1}{2} W + \dot{F}\right) = 0
+\end{equation}
+となる．
+ここから元の方程式を復元すると，
+\begin{equation}
+  V_i = - \sum_{j} \mu_{ij}(X)\pdv{u}{X_j} - \sum_{j} \mu_{ij}(X)k_BT \psi^{-1} \pdv{\psi}{X_j}
+\end{equation}
+となる．
+つまり，パラメータ$X$はエネルギー的な勾配（第1項）以外に，熱的なゆらぎ（第2項）によっても動く．
+（これはLangevin方程式の一般形といえるのだろうか．）
+
+次に，この方程式を連続の式に代入すると，$\mu_{ij}(X)$が$X$によらない場合，
+\begin{equation}
+  \pdv{\psi}{t} = \sum_{i,j} \mu_{ij} \pdv{X_i} \left(\psi\pdv{u}{X_j}\right)  + \sum_{i,j} \mu_{ij} k_B T \pdv{\psi}{X_i}{X_j}
+\end{equation}
+が得られる．
+第1項が消えるような単純な状況を考えれば，第2項が拡散を意味することはすぐに分かる．
+ここからも，Einsteinの関係式
+\begin{equation}
+  D = \mu k_B T = \zeta^{-1} k_B T 
+\end{equation}
+が成り立つことを確かめられる．
+（そういう意味で，いま得た$\psi$についての方程式はFokker-Planck方程式の一般形といえるのだろうか．）
+
+\subsection{界面の影響があるときの一般論}
+Onsagarの変分原理は，
+\begin{equation}
+  \delta R = \delta \left(\frac{1}{2} W + \dot{U} + \dot{U}_S\right) = 0
+\end{equation}
+となる．
+ここから元の方程式を復元すると，
+\begin{equation}
+  V_i = - \sum_{j} \mu_{ij}(X)\pdv{u}{X_j} + \sum_{j} \mu_{ij}(X) \pdv{}{X_j}{X_k} \left(\kappa_S \pdv{\psi}{X_k}\right)
+\end{equation}
+となる．
+とくに，$\kappa$が$X$に依存しない場合には，
+\begin{equation}
+  V_i = - \sum_{j} \mu_{ij}(X)\pdv{u}{X_j} + \sum_{j} \mu_{ij}(X) \kappa_S \pdv{X_j} \Delta \psi
+\end{equation}
+となる．
+ここで，$\Delta$はラプラシアンである．
+よって，$\mu(X)$が$X$に依存しないとき，これを連続の式に代入して，
+\begin{equation}
+  \pdv{\psi}{t} = \sum_{i,j} \mu_{ij} \pdv{X_i} \left(\psi\pdv{u}{X_j}\right)  + \sum_{i,j} \mu_{ij} \kappa_S \pdv{X_i}\left(\psi\pdv{\Delta \psi}{X_j}\right)
+\end{equation}
+を得る．
+こうしたところから分かるように，界面の寄与は$\psi$の空間についての3階，4階微分の項として与えられる．
+つまり，空間サイズが大きいとき，界面の寄与による項はその他の項（空間についての2階までの微分）と比べて小さくなる（と私は考える）．
+
+\subsection{ポアズイユ流}
+
+\subsection{不安定性とモードの出現}
+
+\end{document}

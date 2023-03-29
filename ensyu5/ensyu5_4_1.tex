@@ -1,0 +1,424 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+% 数式
+\usepackage{amsmath,amsfonts}
+\usepackage{bm}
+\usepackage{physics}
+% 画像
+\usepackage[dvipdfmx]{graphicx}
+% 枠
+\usepackage{tcolorbox}
+
+\begin{document}
+
+\title{物理学演習V　No.4\,問題[1]}
+\author{05-211525　齋藤駿一}
+\date{2021年11月2日発表}
+\maketitle
+
+\section{問題(1)}
+\begin{tcolorbox}[title=問題(1)]
+  スピン$1/2$を持つ同種類のフェルミ粒子2個からなる系を考える．
+  これら2つのフェルミ粒子に作用するスピン演算子を$\hat{\bm{s}}_1$，$\hat{\bm{s}}_2$とするとき，演算子
+  \begin{equation}
+    \hat{P}^{(\mathrm{spin})}_{12} := \frac{1}{2}\left(1 + \frac{4}{\hbar^2} \hat{\bm{s}}_1\cdot \hat{\bm{s}}_2\right)
+  \end{equation}
+  は2つの粒子のスピン状態を互いに交換するように作用することを示せ．  
+\end{tcolorbox}
+
+まず2粒子をラベル$i=1,2$で区別し，各々のスピンの昇降演算子を
+\begin{equation}
+  \hat{s}^{\pm}_i := \hat{s}^{x}_i \pm i \hat{s}^{y}_i \qquad (i = 1,2)
+\end{equation}
+と定義する．
+このとき
+\begin{align}
+  \hat{P}^{(\mathrm{spin})}_{12} &= \frac{1}{2}\left(1 + \frac{4}{\hbar^2} \hat{\bm{s}}_1\cdot \hat{\bm{s}}_2\right) \notag\\
+  &= \frac{1}{2}\left(1 + \frac{4}{\hbar^2} \left(\hat{s}^x_1 \hat{s}^x_2 + \hat{s}^y_1 \hat{s}^y_2 + \hat{s}^z_1 \hat{s}^z_2 \right)\right) \notag\\
+  &=  \frac{1}{2}\left(1 + \frac{4}{\hbar^2} \left(\frac{1}{2}\hat{s}^{+}_1 \hat{s}^{-}_2 + \frac{1}{2}\hat{s}^{-}_1 \hat{s}^{+}_2 + \hat{s}^z_1 \hat{s}^z_2 \right)\right)  
+\end{align}
+と変形できる．
+また2粒子系のスピンの固有状態を
+\begin{equation}
+  \ket{\updownarrow \updownarrow} = \ket{\updownarrow}_1\otimes \ket{\updownarrow}_2 = \ket{s^z_1}_1\otimes\ket{s^z_2}_2 := \ket{\frac{1}{2}, s^z_1 = \pm\frac{1}{2}}_1 \otimes \ket{\frac{1}{2}, s^z_2=\pm\frac{1}{2}}_2
+\end{equation}
+と表す．
+ここで左辺の左(右)の矢印の上下は右辺の$s^z_1$($s^z_2$)の正負と対応している．
+このとき$i=1,2$に対して
+\begin{align}
+  &\hat{s}^{+}_i \ket{\uparrow}_i = \hat{s}^{-}_i \ket{\downarrow}_i = 0 \\
+  &\hat{s}^{+}_i \ket{\downarrow}_i = \hbar\ket{\uparrow}_i \\
+  &\hat{s}^{-}_i \ket{\uparrow}_i = \hbar\ket{\downarrow}_i
+\end{align}
+が成り立つ．
+これより
+\begin{align}
+  \hat{P}^{(\mathrm{spin})}_{12} \ket{\uparrow \uparrow} &= \frac{1}{2}\left(1 + \frac{4}{\hbar^2} \hat{s}^z_1 \hat{s}^z_2 \right) \ket{\uparrow \uparrow} \notag\\
+  &= \frac{1}{2}\left(\ket{\uparrow \uparrow} + \frac{4}{\hbar^2} \cdot\frac{\hbar}{2} \cdot\frac{\hbar}{2} \ket{\uparrow \uparrow}\right) \notag\\
+  &= \ket{\uparrow \uparrow}
+\end{align}
+および
+\begin{align}
+  \hat{P}^{(\mathrm{spin})}_{12} \ket{\uparrow \downarrow} &=  \frac{1}{2}\left(1 + \frac{4}{\hbar^2} \left(\frac{1}{2}\hat{s}^{-}_1 \hat{s}^{+}_2 + \hat{s}^z_1 \hat{s}^z_2 \right)\right) \ket{\uparrow \downarrow} \notag\\
+  &= \frac{1}{2}\left(\ket{\uparrow \downarrow} + \frac{4}{\hbar^2}\left(\frac{1}{2}\hbar\cdot\hbar \ket{\downarrow \uparrow} + \frac{\hbar}{2} \cdot\frac{-\hbar}{2}\ket{\uparrow \downarrow}\right)  \right) \notag\\
+  &= \ket{\downarrow \uparrow}
+\end{align}
+がいえる．
+これと同様にして
+\begin{align}
+  \hat{P}^{(\mathrm{spin})}_{12} \ket{\downarrow \uparrow} &=  \frac{1}{2}\left(1 + \frac{4}{\hbar^2} \left(\frac{1}{2}\hat{s}^{+}_1 \hat{s}^{-}_2 + \hat{s}^z_1 \hat{s}^z_2 \right)\right) \ket{\downarrow \uparrow} \notag\\
+  &= \frac{1}{2}\left(\ket{\downarrow \uparrow} + \frac{4}{\hbar^2}\left(\frac{1}{2}\hbar\cdot\hbar \ket{\uparrow \downarrow} + \frac{-\hbar}{2} \cdot\frac{\hbar}{2}\ket{\downarrow \uparrow}\right)  \right) \notag\\
+  &= \ket{\uparrow \downarrow}
+\end{align}
+および
+\begin{align}
+  \hat{P}^{(\mathrm{spin})}_{12} \ket{\downarrow \downarrow} &= \frac{1}{2}\left(1 + \frac{4}{\hbar^2} \hat{s}^z_1 \hat{s}^z_2 \right) \ket{\downarrow \downarrow} \notag\\
+  &= \frac{1}{2}\left(\ket{\downarrow \downarrow} + \frac{4}{\hbar^2} \cdot\frac{-\hbar}{2} \cdot\frac{-\hbar}{2} \ket{\downarrow \downarrow}\right) \notag\\
+  &= \ket{\downarrow \downarrow}
+\end{align}
+もいえる．
+以上より，確かに$\hat{P}^{(\mathrm{spin})}_{12}$は2つの粒子のスピン状態を互いに交換するように作用している．
+
+\section{問題(2)}
+\begin{tcolorbox}[title=問題(2)]
+  2粒子間の相互作用が無視できる場合を考える．
+  2つのフェルミ粒子の空間部分の波動関数がそれぞれ$\varphi_1(\bm{x})$，$\varphi_2(\bm{x})$で表されるとき，スピン1重項とスピン3重項のそれぞれの状態に対して系の空間部分の波動関数$\phi_S(\bm{x}_1, \bm{x}_2)\,(S=0,1)$を与えよ．
+  ただし，これらの波動関数の重なり積分は0であるものとする：
+  \begin{equation}
+    \int d^3\bm{x} \varphi_1^{\ast}(\bm{x}) \varphi_2(\bm{x}) = \int d^3\bm{x} \varphi_2^{\ast}(\bm{x}) \varphi_1(\bm{x}) = 0
+    \label{overlap}
+  \end{equation} 
+\end{tcolorbox}
+
+問題文にある「空間部分の波動関数」，「スピン1重項」，「スピン3重項」といった用語はあまり聞き慣れないと感じた．
+そのため問題の解答の前にまずこれらについて補足する．
+
+\subsection{フェルミ粒子の波動関数}
+問題(1)では2つのフェルミ粒子のスピンだけを問題にしていたが，ここからはそれに加えて2つのフェルミ粒子の位置も考える．
+まずこの2粒子系に対して，2粒子の相互作用のないハミルトニアンが与えられているとする：
+\begin{equation}
+  \hat{H} = \hat{H}_1 + \hat{H}_2
+\end{equation}
+このとき粒子$i(=1,2)$に対するエネルギー固有状態$\ket{\varphi_i}_i$はハミルトニアン$\hat{H}_i$の固有状態としてそれぞれ定まる．
+さらにハミルトニアン$H_i$はスピン演算子$\hat{\bm{s}}_i$と交換すると考える．
+つまり各々のスピン$s^z_1$，$s^z_2$が定まったエネルギー固有状態(同時固有状態)がとれるとする．
+このとき粒子$i(=1,2)$についてその同時固有状態は次のように書ける：
+\begin{equation}
+  \ket{\varphi_i}_i\otimes\ket{s^z_i}_i
+  \label{space_spin}
+\end{equation}
+このときこの粒子の位置を表す空間座標を$\bm{x}_i$，スピン座標(スピン変数)\footnote{ここでは$\pm 1/2$の値しかとらない変数．}を$\sigma_i$とすると，波動関数は
+\begin{equation}
+  (\bra{\bm{x}_i}_i\otimes\bra{\sigma_i}_i)\ket{\varphi_i}_i\otimes\ket{s^z_i}_i = \braket{\bm{x}_i}{\varphi_i} \braket{\sigma_i}{s^z_i} =: \varphi_i(\bm{x}_i) s^z_i(\sigma_i) 
+\end{equation}
+というように，空間座標に依存する部分(空間部分)とスピンの向きに依存する部分(スピン部分)の積で書ける．
+前者は空間部分の波動関数と呼ばれ，後者はスピン(波動)関数と呼ばれる．
+スピン関数はたとえば$s^z_i=1/2$のとき
+\begin{equation}
+  s^z_i(\sigma_i) = \left\{
+  \begin{array}{ll}
+    1  & \sigma_i = \frac{1}{2}\\
+    0 & \sigma_i = -\frac{1}{2}
+  \end{array}\right.
+\end{equation}
+となる関数である．
+
+\subsection{スピン1重項・3重項}
+全系のスピン演算子
+\begin{equation}
+  \hat{\bm{S}} = \hat{\bm{s}}_1 + \hat{\bm{s}}_2  
+\end{equation}
+を考え，2つのスピンを合成して$\hat{\bm{S}}^2$，$\hat{S}^z$の同時固有状態$\ket{S,M}$を求めることを考える．
+ただし
+\begin{align}
+  \begin{split}
+    \hat{\bm{S}}^2 \ket{S,M} &= \hbar^2 S(S+1) \ket{S,M} \\
+    \hat{S}^z \ket{S,M} &= \hbar M \ket{S,M}    
+  \end{split}
+\end{align}
+とする．
+いま粒子のスピンの大きさはともに$1/2$だから，$S=0,1$である．
+$S=0$に対しては$M=0$の状態だけが定まることからこれをスピン1重項と呼ぶ．
+一方$S=1$に対しては$M=1,0,-1$の3つの状態が定まることからこれをスピン3重項と呼ぶ．
+具体的にスピンを合成すると次がいえる：
+\begin{align}
+  \begin{split}
+    \ket{S=1, M=1} &= \ket{\uparrow\uparrow} \\
+    \ket{S=1, M=0} &= \frac{1}{\sqrt{2}} \left(\ket{\uparrow\downarrow} + \ket{\downarrow\uparrow}\right) \\
+    \ket{S=1, M=-1} &= \ket{\downarrow\downarrow} \\
+    \ket{S=0, M=0} &= \frac{1}{\sqrt{2}} \left(\ket{\uparrow\downarrow} - \ket{\downarrow\uparrow}\right)
+    \label{sm}    
+  \end{split}
+\end{align}
+
+\subsection{問題の解答}
+まずそれぞれの粒子の空間部分の波動関数$\varphi_i$の意味を損なわないように全系の波動関数の形を導く，
+その後スピン関数としてスピンを合成した状態を用い，そのときの空間部分の波動関数を求める．
+
+\subsubsection{全系の波動関数の形を絞る}
+$i(=1,2)$番目の粒子の固有状態が
+\begin{equation}
+  \ket{\varphi_i}_i\ket{s^z_i}_i
+\end{equation}
+で与えられること(ここからは$\otimes$を略す)と粒子が相互作用しないことから，2粒子系の固有状態の一つとして
+\begin{equation}
+  \ket{\varphi_1}_1\ket{s^z_1}_1\ket{\varphi_2}_2\ket{s^z_2}_2
+\end{equation}
+が挙げられる．
+ここでこの状態にスピンの交換$\hat{P}^{(\mathrm{spin})}_{12}$を作用させると
+\begin{equation}
+  \ket{\varphi_1}_1\ket{s^z_2}_1\ket{\varphi_2}_2\ket{s^z_1}_2
+\end{equation}
+というように別の状態になる．
+しかし2粒子は相互作用しておらず，各粒子の位置とスピンは独立に決まると考えると，これも固有状態である．
+同様のことが位置の交換についてもいえる．
+そこで2粒子系の固有状態$\ket{\Psi}$は一般に次のように書けると考える：
+\begin{align}
+  \ket{\Psi} = &c_1 \ket{\varphi_1}_1\ket{s^z_1}_1\ket{\varphi_2}_2\ket{s^z_2}_2 + c_2 \ket{\varphi_1}_1\ket{s^z_2}_1\ket{\varphi_2}_2\ket{s^z_1}_2 \notag\\ 
+  &\qquad + c_3 \ket{\varphi_2}_1\ket{s^z_1}_1\ket{\varphi_1}_2\ket{s^z_2}_2 + c_4\ket{\varphi_2}_1\ket{s^z_2}_1\ket{\varphi_1}_2\ket{s^z_1}_2
+\end{align}
+これを波動関数の形に直すと，
+\begin{align}
+  &\Psi(\bm{x}_1, \sigma_1; \bm{x}_2, \sigma_2) \notag\\
+  &:= \bra{\bm{x}_1}_1\bra{\sigma_1}_1\bra{\bm{x}_2}_2\bra{\sigma_2}_2 \ket{\Psi} \notag\\
+  &= c_1 \varphi_1(\bm{x}_1) \varphi_2(\bm{x}_2) s^z_1(\sigma_1) s^z_2(\sigma_2) + c_2 \varphi_1(\bm{x}_1) \varphi_2(\bm{x}_2) s^z_2(\sigma_1) s^z_1(\sigma_2) \notag\\
+  & \qquad + c_3 \varphi_2(\bm{x}_1) \varphi_1(\bm{x}_2) s^z_1(\sigma_1) s^z_2(\sigma_2) + c_4 \varphi_2(\bm{x}_1) \varphi_1(\bm{x}_2) s^z_2(\sigma_1) s^z_1(\sigma_2)
+  \label{cseries}
+\end{align}
+となる．
+また今回2粒子系の固有状態は空間部分$\ket{\phi}$とスピン部分$\ket{\chi}$に分離できると考える：
+\begin{equation}
+  \ket{\Psi} = \ket{\phi} \ket{\chi}
+\end{equation}
+波動関数に直すと
+\begin{align}
+  \Psi(\bm{x}_1, \sigma_1; \bm{x}_2, \sigma_2) 
+  &:= \bra{\bm{x}_1}_1\bra{\sigma_1}_1\bra{\bm{x}_2}_2\bra{\sigma_2}_2 \ket{\Psi} \notag\\
+  &= \braket{\bm{x}_1, \bm{x}_2}{\phi} \braket{\sigma_1, \sigma_2}{\chi} \notag\\
+  &=: \phi(\bm{x}_1, \bm{x}_2) \chi(\sigma_1, \sigma_2)
+  \label{product}
+\end{align}
+となる．
+式\eqref{cseries}から式\eqref{product}への因数分解ができるためには，
+\begin{align}
+  \phi(\bm{x}_1, \bm{x}_2) &= A \varphi_1(\bm{x}_1) \varphi_2(\bm{x}_2) + B \varphi_2(\bm{x}_1) \varphi_1(\bm{x}_2) \\
+  \chi(\sigma_1,\sigma_2) &= C s^z_1(\sigma_1) s^z_2(\sigma_2) + D s^z_2(\sigma_1) s^z_1(\sigma_2)
+\end{align}
+と書ければ良い．
+ここで係数は
+\begin{equation}
+  c_1 = AC, \,c_2 = AD,\,c_3 = BC,\,c_4 = BD
+\end{equation}
+と対応する．
+
+まずフェルミ粒子の性質から，粒子の交換を考えたとき
+\begin{equation}
+  \Psi(\bm{x}_2, \sigma_2; \bm{x}_1, \sigma_1) = - \Psi(\bm{x}_1, \sigma_1; \bm{x}_2, \sigma_2) 
+\end{equation}
+がいえる．
+よって
+\begin{equation}
+  c_4 = - c_1,\qquad c_3 = - c_2 
+\end{equation}
+が必要である．
+これより
+\begin{align}
+  AC = - BD \\
+  AD = - BC 
+\end{align}
+がいえる．
+$\Psi\neq 0$でありながらこの条件を満たすのは
+\begin{equation}
+  B = \pm A, \qquad  D = \mp C 
+\end{equation}
+のときに限られる．
+よって
+\begin{align}
+  \begin{split}
+    \phi(\bm{x}_1, \bm{x}_2) &= A\left(\varphi_1(\bm{x}_1) \varphi_2(\bm{x}_2) \pm \varphi_2(\bm{x}_1) \varphi_1(\bm{x}_2)\right)  \\
+    \chi(\sigma_1,\sigma_2) &= C \left(s^z_1(\sigma_1) s^z_2(\sigma_2) \mp s^z_2(\sigma_1) s^z_1(\sigma_2)\right)
+    \label{pmmp}    
+  \end{split}
+\end{align}
+
+\subsubsection{スピンを合成した結果を利用する}
+ここで得られたスピン関数の形に注目すると，これはスピンの交換に関して対称または反対称となっている．
+一方スピンを合成して得た式\eqref{sm}もスピンの交換に関して対称または反対称であり，式\eqref{pmmp}のスピン関数の形と合っている．
+たとえば$S=1,M=0$の場合，式\eqref{pmmp}で$s^z_1=1/2,\,s^z_2=-1/2$\,(または$s^z_1=-1/2,\,s^z_2=1/2$)\,，$C=D=1/\sqrt{2}$とした式と一致する：
+\begin{equation}
+  \bra{\sigma_1}_1\bra{\sigma}_2 \ket{S=1,M=0} =  \frac{1}{\sqrt{2}} \left(s^z_1(\sigma_1)s^z_2(\sigma_2) + s^z_2(\sigma_1)s^z_1(\sigma_2)\right)
+\end{equation}
+そこでここからは$\chi(\sigma_1, \sigma_2)$として
+\begin{equation}
+  \chi(\sigma_1, \sigma_2) = \chi_{SM}(\sigma_1,\sigma_2) := \bra{\sigma_1}_1\bra{\sigma}_2 \ket{S,M}
+\end{equation}
+を考える．
+また$\chi_{SM}(\sigma_1,\sigma_2)$に対して空間部分の波動関数を改めて
+\begin{equation}
+  \phi(\bm{x}_1, \bm{x}_2) = \phi_S(\bm{x}_1, \bm{x}_2) = A\left(\varphi_1(\bm{x}_1) \varphi_2(\bm{x}_2) \pm \varphi_2(\bm{x}_1) \varphi_1(\bm{x}_2)\right)
+\end{equation}
+とおく\footnote{後で見るように空間部分の波動関数は$M$によらない．}．
+問題で問われているのはこの$\phi_S$がどうなるかということである．
+
+スピンを合成して得られた式\eqref{sm}から，スピン関数はスピンの交換に関して$S=0$のとき反対称であり，$S=1$のとき対称である．
+また式\eqref{pmmp}から，スピン関数がスピンの交換に関して対称(反対称)のとき，空間部分の波動関数は位置座標の交換に関して反対称(対称)である．
+よって位置座標の交換に関して$\phi_0(\bm{x}_1,\bm{x}_2)$は反対称であり，$\phi_1(\bm{x}_1,\bm{x}_2)$は対称である．
+また空間部分の波動関数の規格化条件から
+\begin{alignat}{2}
+  1 &= \int d\bm{x}_1 \int d\bm{x}_2 &&\phi^*_S(\bm{x}_1, \bm{x}_2) \phi_S(\bm{x}_1, \bm{x}_2) \notag\\
+  &= \int d\bm{x}_1 \int d\bm{x}_2 &&\left(A^*\varphi^*_1 (\bm{x}_1)\varphi^*_2 (\bm{x}_2) + B^*\varphi^*_2(\bm{x}_1)\varphi^*_1 (\bm{x}_2)\right) \notag\\ 
+  &&& \qquad \left(A\varphi_1(\bm{x}_1)\varphi_2(\bm{x}_2) + B \varphi_2(\bm{x}_1)\varphi_1(\bm{x}_2)\right) \notag\\
+  &= \lvert A \rvert^2 + \lvert B \rvert^2 \notag\\
+  &= 2\lvert A \rvert^2
+\end{alignat}
+ここで$\varphi_1$と$\varphi_2$の重なり積分が0となること(式\eqref{overlap})を用いた．
+よって$S=0$のとき$A=B=1/\sqrt{2}$，$S=1$のとき$A=-B=1/\sqrt{2}$ととれば良い．
+したがって$S=0,1$に対して
+\begin{equation}
+  \phi_S(\bm{x}_1, \bm{x}_2) 
+  = \left\{
+  \begin{array}{ll}
+    \frac{1}{\sqrt{2}}\left(\varphi_1(\bm{x}_1)\varphi_2(\bm{x}_2) + \varphi_2(\bm{x}_1)\varphi_1(\bm{x}_2)\right) & (S = 0)\\
+    \frac{1}{\sqrt{2}}\left(\varphi_1(\bm{x}_1)\varphi_2(\bm{x}_2) - \varphi_2(\bm{x}_1)\varphi_1(\bm{x}_2)\right) & (S = 1)
+  \end{array}
+  \right.
+\end{equation}
+とすれば良い．
+
+\section{問題(3)}
+\begin{tcolorbox}[title=問題(3)]
+  次に，摂動と見なしうるくらい小さなポテンシャル$U(\lvert \bm{x}_1 - \bm{x}_2\rvert)$を加える．
+  このとき，スピン1重項とスピン3重項のそれぞれの状態に対してエネルギーの変化を1次の摂動論で
+  \begin{equation}
+    \Delta E = \Delta E_{\mathrm{c}} \pm \Delta E_{\mathrm{ex}}
+  \end{equation}
+  の形(波動関数の空間積分)に求めよ．
+  特に，交換エネルギーに対応する部分$\pm \Delta E_{\mathrm{ex}}$が
+  \begin{equation}
+    \hat{V} = - \Delta E_{\mathrm{ex}} \hat{P}^{(\mathrm{spin})}_{12} 
+  \end{equation}
+  なる演算子の固有値として表されることを示せ．
+\end{tcolorbox}
+
+まず
+\begin{equation}
+  \Psi_{SM}(\bm{x}_1,\sigma_1; \bm{x}_2,\sigma_2) := \phi_{S}(\bm{x}_1, \bm{x}_2) \chi_{SM} (\sigma_1, \sigma_2)  
+\end{equation}
+\begin{equation}
+  \ket{\Psi_{SM}} := \ket{\phi_S} \ket{\chi_{SM}}
+\end{equation}
+と定義する．
+$S=0,1$に対してエネルギーの1次の摂動は次のように計算できる：
+\begin{align}
+  \Delta E 
+  &= \expval{\hat{U}(\lvert \hat{\bm{x}}_1 - \hat{\bm{x}}_2\rvert)}{\Psi_{SM}} \notag\\
+  &= \int d\bm{x}_1 \int d\bm{x}_2 \sum_{\sigma_1} \sum_{\sigma_2} \Psi^*_{SM}(\bm{x}_1, \sigma_1; \bm{x}_2,\sigma_2) U(\lvert \bm{x}_1 - \bm{x}_2 \rvert) \Psi_{SM}(\bm{x}_1, \sigma_1; \bm{x}_2,\sigma_2) \notag\\
+  &= \int d\bm{x}_1 \int d\bm{x}_2 \phi^*_S(\bm{x}_1, \bm{x}_2) U(\lvert \bm{x}_1 - \bm{x}_2 \rvert) \phi_S(\bm{x}_1, \bm{x}_2) \notag\\
+  &= \frac{1}{2}\int d\bm{x}_1 \int d\bm{x}_2 \left( \varphi^*_1(\bm{x}_1)\varphi^*_2(\bm{x}_2) \pm \varphi^*_2(\bm{x}_1)\varphi^*_1(\bm{x}_2)\right) U(\lvert\bm{x}_1 - \bm{x}_2\rvert) \notag\\
+  &\hspace{5cm} \left( \varphi_1(\bm{x}_1)\varphi_2(\bm{x}_2) \pm \varphi_2(\bm{x}_1)\varphi_1(\bm{x}_2) \right) \notag\\
+  &= \frac{1}{2} \int d\bm{x}_1 \int d\bm{x}_2 \left(\lvert \varphi_1(\bm{x}_1) \rvert^2 \lvert \varphi_2(\bm{x}_2) \rvert^2 + \lvert \varphi_2(\bm{x}_1) \rvert^2 \lvert \varphi_1(\bm{x}_2) \rvert^2 \right) U(\lvert\bm{x}_1 - \bm{x}_2\rvert) \notag\\
+  &\qquad\pm \frac{1}{2} \int d\bm{x}_1 \int d\bm{x}_2 ( \varphi^*_1(\bm{x}_1)\varphi_2(\bm{x}_1)\varphi^*_2(\bm{x}_2)\varphi_1(\bm{x}_2) \notag\\
+  &\hspace{4cm} + \varphi^*_2(\bm{x}_1)\varphi_1(\bm{x}_1)\varphi^*_1(\bm{x}_2)\varphi_2(\bm{x}_2)  ) U(\lvert\bm{x}_1 - \bm{x}_2\rvert)
+  \label{dE}
+\end{align}
+よってこの第1項の積分を$\Delta E_{\mathrm{c}}$とし，第2項の積分を$\Delta E_{\mathrm{ex}}$とおくと
+\begin{equation}
+  \Delta E = \Delta E_{\mathrm{c}} \pm \Delta E_{\mathrm{ex}}
+\end{equation}
+と書ける．
+もう少し整理すると第1項の積分は
+\begin{align}
+  \Delta E_{\mathrm{c}} 
+  &:= \frac{1}{2} \int d\bm{x}_1 \int d\bm{x}_2 \left(\lvert \varphi_1(\bm{x}_1) \rvert^2 \lvert \varphi_2(\bm{x}_2) \rvert^2 + \lvert \varphi_2(\bm{x}_1) \rvert^2 \lvert \varphi_1(\bm{x}_2) \rvert^2 \right) U(\lvert\bm{x}_1 - \bm{x}_2\rvert) \notag\\
+  &= \frac{1}{2} \int d\bm{x}_1 \int d\bm{x}_2 \lvert \varphi_1(\bm{x}_1) \rvert^2 \lvert \varphi_2(\bm{x}_2) \rvert^2 U(\lvert\bm{x}_1 - \bm{x}_2\rvert) \notag\\
+  &\qquad+ \frac{1}{2}\int d\bm{x}_2 \int d\bm{x}_1\lvert \varphi_2(\bm{x}_2) \rvert^2 \lvert \varphi_1(\bm{x}_1) \rvert^2  U(\lvert\bm{x}_2 - \bm{x}_1\rvert) \notag\\
+  &= \frac{1}{2} \int d\bm{x}_1 \int d\bm{x}_2 \lvert \varphi_1(\bm{x}_1) \rvert^2 \lvert \varphi_2(\bm{x}_2) \rvert^2 U(\lvert\bm{x}_1 - \bm{x}_2\rvert) \notag\\
+  &\qquad+ \frac{1}{2}\int d\bm{x}_1 \int d\bm{x}_2\lvert \varphi_1(\bm{x}_1) \rvert^2\lvert \varphi_2(\bm{x}_2) \rvert^2   U(\lvert\bm{x}_2 - \bm{x}_1\rvert) \notag\\ 
+  &= \int d\bm{x}_1 \int d\bm{x}_2 \lvert \varphi_1(\bm{x}_1) \rvert^2 \lvert \varphi_2(\bm{x}_2) \rvert^2 U(\lvert\bm{x}_1 - \bm{x}_2\rvert)
+  \label{Ec}
+\end{align}
+となり，第2項の積分も同様の計算から
+\begin{align}
+  \Delta E_{\mathrm{ex}} 
+  &:= \frac{1}{2} \int d\bm{x}_1 \int d\bm{x}_2 ( \varphi^*_1(\bm{x}_1)\varphi_2(\bm{x}_1)\varphi^*_2(\bm{x}_2)\varphi_1(\bm{x}_2) \notag\\
+  &\hspace{4cm} + \varphi^*_2(\bm{x}_1)\varphi_1(\bm{x}_1)\varphi^*_1(\bm{x}_2)\varphi_2(\bm{x}_2)  ) U(\lvert\bm{x}_1 - \bm{x}_2\rvert) \notag\\
+  &= \frac{1}{2} \int d\bm{x}_1 \int d\bm{x}_2 \varphi^*_1(\bm{x}_1)\varphi_2(\bm{x}_1)\varphi^*_2(\bm{x}_2)\varphi_1(\bm{x}_2) U(\lvert\bm{x}_1 - \bm{x}_2\rvert) \notag\\
+  &\qquad + \frac{1}{2}\int d\bm{x}_2 \int d\bm{x}_1 \varphi^*_2(\bm{x}_2)\varphi_1(\bm{x}_2)\varphi^*_1(\bm{x}_1)\varphi_2(\bm{x}_1) ) U(\lvert\bm{x}_2 - \bm{x}_1\rvert) \notag\\
+  &= \frac{1}{2} \int d\bm{x}_1 \int d\bm{x}_2 \varphi^*_1(\bm{x}_1)\varphi_2(\bm{x}_1)\varphi^*_2(\bm{x}_2)\varphi_1(\bm{x}_2) U(\lvert\bm{x}_1 - \bm{x}_2\rvert) \notag\\
+  &\qquad +\frac{1}{2} \int d\bm{x}_1 \int d\bm{x}_2 \varphi^*_1(\bm{x}_1)\varphi_2(\bm{x}_1)\varphi^*_2(\bm{x}_2)\varphi_1(\bm{x}_2) U(\lvert\bm{x}_2 - \bm{x}_1\rvert) \notag\\
+  &= \int d\bm{x}_1 \int d\bm{x}_2 \varphi^*_1(\bm{x}_1)\varphi_2(\bm{x}_1)\varphi^*_2(\bm{x}_2)\varphi_1(\bm{x}_2) U(\lvert\bm{x}_1 - \bm{x}_2\rvert) 
+  \label{Eex}
+\end{align}
+となる．
+
+また$\ket{\Psi_{SM}}$はスピンの交換$\hat{P}^{(\mathrm{spin})}_{12}$に関して$S=0$のとき反対称であり，$S=1$のとき対称である．
+つまり$S=0,1$に対して
+\begin{equation}
+  \hat{P}^{(\mathrm{spin})}_{12} \ket{\Psi_{SM}} = \mp \ket{\Psi_{SM}}
+\end{equation}
+が成り立つ．
+したがって
+\begin{equation}
+  \expval{\hat{V}}{\Psi_{SM}} = - \Delta E_{\mathrm{ex}} \expval{\hat{P}^{\mathrm{spin}}_{12}}{\Psi_{SM}} = \pm \Delta E_{\mathrm{ex}}
+\end{equation}
+がいえ，確かに式\eqref{dE}の第2項が$\hat{V}$の期待値であることが確認できる．
+
+\section{問題(4)}
+\begin{tcolorbox}[title=問題(4)]
+  特に，
+  \begin{equation}
+    U(\left| \bm{x}_1 - \bm{x}_2\right|) = \lambda \delta^{(3)}(\bm{x}_1 - \bm{x}_2) \qquad (\lambda > 0)
+  \end{equation}
+  のとき，スピン1重項とスピン3重項のそれぞれの状態に対してエネルギーの変化を1次の摂動論で求め，その結果について物理的意味を考察せよ．  
+\end{tcolorbox}
+
+式\eqref{Ec}から
+\begin{align}
+  \Delta E_{\mathrm{c}} 
+  &= \int d\bm{x}_1 \int d\bm{x}_2 \lvert \varphi_1(\bm{x}_1) \rvert^2 \lvert \varphi_2(\bm{x}_2) \rvert^2 U(\lvert\bm{x}_1 - \bm{x}_2\rvert) \notag\\
+  &= \lambda \int d\bm{x}_1 \int d\bm{x}_2 \lvert \varphi_1(\bm{x}_1) \rvert^2 \lvert \varphi_2(\bm{x}_2) \rvert^2 \delta^{(3)}(\bm{x}_1 - \bm{x}_2) \notag\\
+  &= \lambda \int d\bm{x} \lvert \varphi_1(\bm{x}) \rvert^2 \lvert \varphi_2(\bm{x}) \rvert^2 
+\end{align}
+となる．
+また式\eqref{Eex}から
+\begin{align}
+  \Delta E_{\mathrm{ex}} 
+  &= \int d\bm{x}_1 \int d\bm{x}_2 \varphi^*_1(\bm{x}_1)\varphi_2(\bm{x}_1)\varphi^*_2(\bm{x}_2)\varphi_1(\bm{x}_2) U(\lvert\bm{x}_1 - \bm{x}_2\rvert) \notag\\
+  &= \lambda \int d\bm{x}_1 \int d\bm{x}_2 \varphi^*_1(\bm{x}_1)\varphi_2(\bm{x}_1)\varphi^*_2(\bm{x}_2)\varphi_1(\bm{x}_2) \delta^{(3)}(\bm{x}_1 - \bm{x}_2) \notag \\
+  &= \lambda \int d\bm{x} \lvert \varphi_1(\bm{x}) \rvert^2 \lvert \varphi_2(\bm{x}) \rvert^2 \notag\\
+  &= \Delta E_{\mathrm{c}} 
+\end{align}
+となる．
+したがってエネルギーの1次の摂動は
+\begin{equation}
+  \Delta E = \left\{
+  \begin{array}{ll}
+    2 \lambda \int d\bm{x} \lvert \varphi_1(\bm{x}) \rvert^2 \lvert \varphi_2(\bm{x}) \rvert^2 > 0 & (S=0) \\
+    0 & (S=1)
+  \end{array}
+  \right.
+\end{equation}
+と求まる．
+
+次にこの結果の物理的意味を考察する．
+いま求めたエネルギーの1次の摂動$\Delta E$は，$\bm{x}_1 = \bm{x}_2$のときにのみ極めて強く働くポテンシャル$U$によるものである．
+しかしスピン3重項($S=1$)の場合には$\Delta E=0$なので，ポテンシャル$U$は系のエネルギーを変えない．
+つまり逆に言えばポテンシャル$U$のない(無摂動の)状況で$\bm{x}_1=\bm{x}_2$が実現しないと考えられる．
+このことは，$S=1$の場合には2つのフェルミ粒子が同じ位置を占めないということを意味する．
+たとえば$S=1,M=\pm 1$では2つのフェルミ粒子のスピンが平行である．
+よってこの結果は「同方向のスピンを持つ2つの同種のフェルミ粒子は同じ位置を占めない」という性質を表している．
+これは「同種のフェルミ粒子は同じ状態に高々一つしかいられない」というパウリの排他律の一種である．
+
+一方でスピン1重項($S=0$)の場合$\Delta E>0$となっている．
+これは$S=1$の場合とは逆に$S=0$では，無摂動の状況で$\bm{x}_1 = \bm{x}_2$が実現しうることを表している．
+これとパウリの排他律を考えると，$S=0$では2つのフェルミ粒子のスピン状態が異なっていると見なすことができ，そのため同じ位置を占めても同じ状態を占めることにはならないため問題ない，という解釈ができる．
+
+\begin{thebibliography}{99}
+  \bibitem{sakurai}
+    J.J.Sakurai『現代の量子力学(下)』吉岡書店
+  \bibitem{kunihiro}
+    国広梯二『量子力学』東京図書
+\end{thebibliography}
+
+\end{document}

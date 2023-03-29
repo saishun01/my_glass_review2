@@ -1,0 +1,62 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+% 数式
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{physics}
+% 画像
+\usepackage[dvipdfmx]{graphicx}
+% ローマ数字
+\usepackage{otf}
+% 単位
+\usepackage{siunitx}
+% 表
+\usepackage{multirow}
+% 化学反応
+\usepackage[version=4]{mhchem}
+
+
+\begin{document}
+
+\title{理論演習4Sレポート}
+\author{05-211525　齋藤駿一}
+\date{\today}
+\maketitle
+
+\tableofcontents
+
+\section{はじめに}
+\input{intro}
+
+\section{基本的な細胞モデル}
+\input{basic_model}
+
+\section{細胞内外で栄養濃度が異なるモデル}
+\input{diffusion_model}
+
+\section{ゴミ分子を導入したモデル}
+\input{error_model}
+
+\section{結論と今後の課題}
+本レポートでは，ある栄養濃度以下で成長速度が急激に下がるという現象を，代謝物Xの生成，消費，希釈の三つの要因により説明した．
+とくに，この三つの要因だけを反映した簡単な細胞モデルから，成長に必要な栄養濃度$n^*$は，代謝物Xの消費反応の速度定数$\phi$を生成反応の速度定数$k$で割った値$\phi/k$であることが分かった．
+さらに，細胞内の栄養濃度を変数としたモデルでも，まったく同じ主張が成り立つことが分かった．
+そのほかに，代謝物Xの生成反応が確率$\epsilon$で失敗してゴミ分子Zを生成し，それによって代謝物Xの自己触媒反応が阻害されるというモデルも考えた．
+その場合，$\epsilon$が成分濃度によらず一定ならば，実効的な生成反応$k(1-\epsilon)$を$k$の代わりに使った値$\phi/(k(1-\epsilon))$が$n^*$となることが分かった．
+さらに，エラー率が成分濃度に依存する場合でも，$n^*=\phi/(k(1-\epsilon))$をもとに，数値計算の結果をある程度説明できた．
+つまり，最初のモデルで得られた式$n^*=\phi/k$は，細胞の成長条件を調べる一つの方法として有効だと考えられる．
+
+しかし，自己触媒反応$\ce{N(Y) + X -> X + X}$に変更を加えた場合の議論や，エラー率が式\eqref{errx}，\eqref{erry}以外の形で成分濃度に依存するときの議論などはまだ行っていない．
+また，一般にどのような化学反応系で本レポートと同じような議論ができるかという問題も残っている．
+とくに最後の問題にはっきりと答えるには，本レポートの議論をさらに数学的に洗練された形に言い換える必要があると思われる．
+このような残された問題については，今後探求していきたい．
+
+\begin{thebibliography}{99}
+  \bibitem{hurusawa} Hurusawa, C. and Kaneko, K. Zipf's Law in Gene Expression. \textit{Phys. Rev. Lett.} \textbf{90}: 088102, 2003.
+  \bibitem{hk17} Himeoka, Y. and Kaneko, K. Theory for Transitions Between Exponential and Stationary Phases:
+  Universal Laws for Lag Time. \textit{Phys. Rev. X.} \textbf{7}: 021049, 2017.  
+  \bibitem{hk14} Himeoka, Y. and Kaneko, K. Entropy production of a steady-growth cell with catalytic reactions. \textit{Phys. Rev. E.} \textbf{90}: 042714, 2014.  
+\end{thebibliography}
+
+\end{document}

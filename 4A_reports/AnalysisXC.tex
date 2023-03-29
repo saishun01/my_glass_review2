@@ -1,0 +1,505 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+% 数式
+\usepackage{amsmath,amsfonts}
+\usepackage{bm}
+\usepackage{physics}
+% 画像
+\usepackage[dvipdfmx]{graphicx}
+% ローマ数字
+\usepackage{otf}
+% 単位
+\usepackage{siunitx}
+% 表
+\usepackage{multirow}
+% 化学反応
+\usepackage[version=4]{mhchem}
+
+
+\begin{document}
+
+\title{解析学XCレポート}
+\author{05-211525　齋藤駿一}
+\date{\today}
+\maketitle
+
+\section*{1}
+\begin{equation}
+  L = \left(
+    \begin{matrix}
+      l_1 & l_2 \\
+      l_2 & l_3 
+    \end{matrix}
+  \right)
+\end{equation}
+に対し，
+\begin{equation}
+  \dv{x(t)}{t} = Lx(t),\qquad t>0,\qquad x(0)>a
+\end{equation}
+を満たすとする．
+ただし，$l_1,l_2,l_3$を実数として，$l_2\neq 0$とする．
+
+\subsection*{(1)}
+$L$の固有値$\lambda$に対し，固有方程式
+\begin{equation}
+  \left|L-\lambda I\right| = (l_1-\lambda)(l_3-\lambda)-l_2^2 = 0
+\end{equation}
+すなわち
+\begin{equation}
+  \lambda^2 - (l_1+l_3)\lambda + l_1l_3-l_2^2 = 0 \label{eigeq}
+\end{equation}
+を満たす．
+これを$\lambda$に関する2次方程式と見たとき，判別式$D$は
+\begin{equation}
+  D = (l_1+l_3)^2 - 4(l_1l_3-l_2^2) = (l_1-l_3)^2 + 4l_2^2 > 0
+\end{equation}
+となる．
+ここで$l_2\neq 0$を用いた．
+したがって，固有方程式\eqref{eigeq}は相異なる二つの実数解を持つ．
+つまり，$L$は実数の相異なる固有値$\lambda_1,\lambda_2$を持つ．
+
+\subsection*{(2)}
+$i=1,2$に対して，固有値$\lambda_i$に対する固有ベクトル$v_i= ^t(v_{i1},v_{i2})$について
+\begin{equation}
+  (L-\lambda_i I)v_i = \left(
+    \begin{matrix}
+      l_1 - \lambda_i & l_2 \\
+      l_2 & l_3 - \lambda_i
+    \end{matrix}
+  \right)
+  \left(
+    \begin{matrix}
+      v_{i1} \\
+      v_{i2}
+    \end{matrix}
+  \right)
+\end{equation}
+が成り立つ．
+これより
+\begin{equation}
+  v_{i2} = - \frac{l_1-\lambda_i}{l_2} v_{i1}
+\end{equation}
+であり，$v_i$が規格化されているとすると，
+\begin{equation}
+  1 = v_{i1}^2 + v_{i2}^2 = \frac{(l_1-\lambda_i)^2+l_2^2}{l_2^2} v_{i1}^2
+\end{equation}
+が成り立つことから，
+\begin{equation}
+  v_i = \frac{1}{\sqrt{(l_1-\lambda_i)^2+l_2^2}}
+  \left(
+  \begin{matrix}
+    l_2 \\
+    -(l_1-\lambda_i)
+  \end{matrix}
+  \right)
+\end{equation}
+と書ける．
+これを用いると，$P_i\,(i=1,2)$は
+\begin{equation}
+  P_i = v_i ^t v_i = \frac{1}{(l_1-\lambda_i)^2+l_2^2}
+  \left(
+  \begin{matrix}
+    l_2^2 & -l_2(l_1-\lambda_i) \\
+    -l_2(l_1-\lambda_i) & (l_1-\lambda_i)^2
+  \end{matrix}
+  \right)
+\end{equation}
+と分かる．
+固有値$\lambda_i$は，固有方程式\eqref{eigeq}を解いて，
+\begin{equation}
+  \lambda_1 = \frac{(l_1+l_3)+\sqrt{(l_1-l_3)^2+4l_2^2}}{2},\qquad \lambda_2 = \frac{(l_1+l_3)-\sqrt{(l_1-l_3)^2+4l_2^2}}{2}
+\end{equation}
+と分かるので，これを代入することで$P_i$を$l_1,l_2,l_3$を用いて表せる．
+
+\subsection*{(3)}
+射影演算子の性質を用いると，
+\begin{align}
+  e^{Lt} &= \sum_{n=0}^{\infty} \frac{L^nt^n}{n!} 
+  = \sum_{n=0}^{\infty} \frac{t^n}{n!}(\lambda_1 P_1 + \lambda_2 P_2)^n \notag\\
+  &= \sum_{n=0}^{\infty} \frac{t^n}{n!} (\lambda_1^n P_1 + \lambda_2^n P_2) 
+  = \left(\sum_{n=0}^{\infty} \frac{(\lambda_1t)^n}{n!}\right)P_1 + \left(\sum_{n=0}^{\infty} \frac{(\lambda_2t)^n}{n!}\right)P_2 \notag\\
+  &= e^{\lambda_1t}P_1 + e^{\lambda_2t}P_2 
+\end{align}
+と計算できる．
+
+\subsection*{(4)}
+$x(t) = e^{Lt}a$とおくと，$x(0)=a$が成り立ち，
+\begin{align}
+  \dv{x(t)}{t} &= \left(\dv{}{t} e^{Lt}\right)a  \notag\\
+  &= \dv{}{t} \left(e^{\lambda_1t}P_1+e^{\lambda_2t}P_2\right)a \notag\\
+  &= (\lambda_1e^{\lambda_1t}P_1 + \lambda_2e^{\lambda_2t}P_2)a \notag\\
+  &= (\lambda_1P_1+\lambda_2P_2)(e^{\lambda_1t}P_1+e^{\lambda_2t}P_2) a \notag\\
+  &= Le^{Lt}a = Lx(t)
+\end{align}
+も成り立つ．
+
+\subsection*{(5)}
+\begin{equation}
+  x(t) = (e^{\lambda_1 t}P_1 + e^{\lambda_2 t}P_2)a
+\end{equation}
+において，$t=T$の場合（$x(T)=b$）を考えると，
+\begin{equation}
+  b = (e^{\lambda_1 T}P_1 + e^{\lambda_2 T}P_2)a
+\end{equation}
+となる．
+ここに前問(2)で求めた$P_i$を代入し整理しようとしたが，式が煩雑になって$l_1,l_2,l_3$について解けなかった．
+
+\subsection*{(6)}
+$l_1=l_3=0$のとき，$L$の固有値は$\lambda_1=l_2,\,\lambda_2=-l_2$となり，スペクトル分解は
+\begin{equation}
+  L = 
+  \frac{l_2}{2}\left(
+  \begin{matrix}
+    1 & 1 \\
+    1 & 1 
+  \end{matrix}
+  \right) + 
+  \frac{-l_2}{2}\left(
+  \begin{matrix}
+    1 & -1 \\
+    -1 & 1
+  \end{matrix}
+  \right)
+\end{equation}
+となる．
+よって，解は
+\begin{align}
+  x(t) &= (e^{l_2 t}P_1 + e^{-l_2 t}P_2)a 
+  = \left(\frac{e^{l_2 t}}{2}\left(
+  \begin{matrix}
+    1 & 1 \\
+    1 & 1 
+  \end{matrix}
+  \right) + 
+  \frac{e^{-l_2 t}}{2}\left(
+  \begin{matrix}
+    1 & -1 \\
+    -1 & 1
+  \end{matrix}
+  \right)\right) a \notag\\
+  &= \left(
+    \begin{matrix}
+      \cosh{(l_2 t)} & \sinh{(l_2 t)} \\
+      \sinh{(l_2 t)} & \cosh{(l_2 t)}
+    \end{matrix}
+    \right)a
+\end{align}
+と書ける．
+ここに$x(T)=b$を代入して成分表示すると，
+\begin{equation}
+  \left(
+    \begin{matrix}
+      b_1 \\
+      b_2
+    \end{matrix}
+  \right)
+  =
+  \left(
+    \begin{matrix}
+      \cosh{(l_2 T)} & \sinh{(l_2 T)} \\
+      \sinh{(l_2 T)} & \cosh{(l_2 T)}
+    \end{matrix}
+  \right)
+  \left(
+    \begin{matrix}
+      a_1 \\
+      a_2
+    \end{matrix}
+  \right)
+  = 
+  \left(
+    \begin{matrix}
+      a_1 \cosh{(l_2 T)} + a_2 \sinh{(l_2 T)}\\
+      a_1 \sinh{(l_2 T)} + a_2 \cosh{(l_2 T)} 
+    \end{matrix}
+  \right)
+\end{equation}
+となり，これより
+\begin{align}
+  b_1 + b_2 &= (a_1 + a_2)e^{l_2 T} \\
+  b_1 - b_2 &= (a_1 - a_2)e^{-l_2 T}
+\end{align}
+が成り立つ．
+よって，$b_1,b_2$について
+\begin{equation}
+  b_1^2 - b_2^2 = (b_1+b_2)(b_1-b_2) = (a_1+a_2)(a_1-a_2) = a_1^2 - a_2^2 \label{ab}
+\end{equation}
+が成り立ち，$l_2$を推定する式として，
+\begin{equation}
+  l_2 = 
+  \begin{cases}
+    \frac{1}{T} \log{\left|\frac{b_1+b_2}{a_1+a_2}\right|} & (a_1\neq -a_2,\quad b_1\neq -b_2)\\
+    \frac{1}{T} \log{\left|\frac{a_1-a_2}{b_1-b_2}\right|} & (a_1\neq a_2,\quad b_1\neq b_2)
+  \end{cases}
+\end{equation}
+が得られる．
+これより，条件\eqref{ab}を満たすとき，$l_2$は一意に定まる．
+
+\section*{2}
+\subsection*{(1)}
+運動方程式
+\begin{equation}
+  \dv[2]{x(t)}{t} = -g,\qquad x(0)=h,\qquad \dv{x(0)}{t}=0
+\end{equation}
+を解くと，
+\begin{equation}
+  x(t) = h - \frac{1}{2}gt^2
+\end{equation}
+となる．
+時刻$t=t_0$の情報を代入すると
+\begin{equation}
+  x(t_0) = h - \frac{1}{2}gt_0^2
+\end{equation}
+となり，これを整理すると
+\begin{equation}
+  g = \frac{2(h-x(t_0))}{t_0^2}
+\end{equation}
+が得られる．
+
+\subsection*{(2)}
+運動方程式
+\begin{equation}
+  \dv[2]{x(t)}{t} = -k\dv{x(t)}{t} - g,\qquad x(0)=h,\qquad \dv{x(0)}{t}=0
+\end{equation}
+を解く．
+まず，
+\begin{equation}
+  \dv{}{t} \left(e^{kt}\dv{x(t)}{t}\right) = \left(\dv[2]{x(t)}{t}+k\dv{x(t)}{t}\right)e^{kt} = -ge^{kt}
+\end{equation}
+の両辺を時刻$t=0$から$t$まで積分すると，初期条件から
+\begin{equation}
+  e^{kt}\dv{x(t)}{t} = \int_0^t (-ge^{kt})\dd{t} = -\frac{g}{k}(e^{kt}-1)
+\end{equation}
+すなわち
+\begin{equation}
+  \dv{x(t)}{t} = -\frac{g}{k}(1-e^{-kt})
+\end{equation}
+が得られる．
+この両辺を再び時刻$t=0$から$t$まで積分すると，初期条件から
+\begin{equation}
+  x(t) - h = - \frac{g}{k}\int_0^t (1-e^{-kt})\dd{t} = - \frac{g}{k} \left[t+\frac{e^{-kt}}{k}\right]_{0}^{t} = - \frac{g}{k} \left(t+\frac{e^{-kt}-1}{k}\right)
+\end{equation}
+が得られる．
+ここに時刻$t=t_0$の情報を代入すると，
+\begin{align}
+  x(t_0) - h &= - \frac{g}{k} \left(t_0+\frac{e^{-kt_0}-1}{k}\right) \notag \\
+  \frac{h-x(t_0)}{gt_0^2} &= \frac{1}{kt_0}\left(1+\frac{e^{-kt_0}-1}{kt_0}\right)
+\end{align}
+となる．
+そこで関数$f$を
+\begin{equation}
+  f(y) = \frac{1}{y}\left(1+\frac{e^{-y}-1}{y}\right) = \frac{e^{-y}+y-1}{y^2} \label{f}
+\end{equation}
+と定義すると，
+\begin{equation}
+  \frac{h-x(t_0)}{gt_0^2} = f(kt_0)
+\end{equation}
+と書ける．
+ここで
+\begin{equation}
+  f'(y) = -\frac{(y+2)}{y^3}\left(e^{-y}+\frac{y-2}{y+2}\right)
+\end{equation}
+であり，これは$y>0$で常に負であることが次のようにして示せる．
+
+まず，$y\ge 2$のとき$f'(y)<0$は分かる．
+次に，$0<y<2$に対して
+\begin{equation}
+  g(y) = y - \ln{(y+2)} + \ln{(2-y)}
+\end{equation}
+を定義すると，
+\begin{equation}
+  g'(y) = 1 - \frac{1}{2+y} + \frac{-1}{2-y} = -\frac{y^2}{4-y^2} < 0
+\end{equation}
+が成り立つので，$g(y)$は単調に減少する．
+これと$g(0)=0$より，$g(y)<0$がいえる．
+したがって，$0<y<2$に対して
+\begin{align}
+  &y < \ln{\left(\frac{2+y}{2-y}\right)} \\
+  &-y < \ln{\left(\frac{2-y}{2+y}\right)} \\
+  &e^{-y} - \frac{2-y}{2+y} > 0
+\end{align}
+がいえる．
+よって，$0<y<2$に対して$f'(y)<0$が分かる．
+以上より，$y>0$で常に$f'(y)<0$である．
+
+したがって，$y>0$で$f(y)$は単調に減少するので，$y>0$で$f$の逆関数$f^{-1}$を定義できる．
+これを用いると，
+\begin{equation}
+  kt_0 = f^{-1}\left(\frac{h-x(t_0)}{gt_0^2}\right)
+\end{equation}
+すなわち
+\begin{equation}
+  k = \frac{1}{t_0}f^{-1}\left(\frac{h-x(t_0)}{gt_0^2}\right)
+\end{equation}
+が成り立つ．
+
+\section*{3}
+\subsection*{(1)}
+\begin{equation}
+  E(t) = \int_0^1 |u(x,t)|^2 dx
+\end{equation}
+に対して，
+\begin{align}
+  E'(t) &= 2\int_0^1 u(x,t) u_t(x,t) dx \\
+  &= 2\int_0^1 u(x,t) u_{xx}(x,t) dx = \left[2u(x,t)u_x(x,t)\right]_0^1 - 2 \int_0^1 |u_x(x,t)|^2 dx \notag\\
+  &= - 2 \int_0^1 |u_x(x,t)|^2 dx
+\end{align}
+および
+\begin{align}
+  E''(t) &= \dv{}{t} \left(- 2 \int_0^1 |u_x(x,t)|^2 dx\right) \notag\\
+  &= - 4 \int_0^1 u_x(x,t)u_{xt}(x,t) dx = - 4 \int_0^1 u_x(x,t)u_{xxx}(x,t) dx \notag\\
+  &= -\left[4u_x(x,t)u_{xx}(x,t)\right]_0^1 + 4\int_0^1 |u_{xx}(x,t)|^2 dx = 4\int_0^1 |u_{xx}(x,t)|^2 dx
+\end{align}
+が分かる．
+ここで，
+\begin{equation}
+  u_{xx}(0,t) = u_{t}(0,t) = 0,\qquad u_{xx}(1,t) = u_{t}(1,t) = 0,
+\end{equation}
+を用いた．
+したがって，Cauchy-Schwarz不等式
+\begin{equation}
+  \left(\int f(x) g(x) dx\right)^2 \le \int f(x)dx \int g(x)dx
+\end{equation}
+を$f(x)=w(x,t),\,g(x)=2w_x(x,t)$の場合に適用すると，
+\begin{equation}
+  E'(t)^2 \le E(t) E''(t)
+\end{equation}
+が得られる．
+したがって，
+\begin{equation}
+  E(t)E''(t) - E'(t)^2 \ge 0
+\end{equation}
+が成り立つ．
+
+\subsection*{(2)}
+$t\ge 0$に対して常に$E(t)\neq 0$のとき，
+\begin{equation}
+  (\log{E(t)})'' = \left(\frac{E'(t)}{E(t)}\right)' = \frac{E(t)E''(t) - E'(t)^2}{E(t)^2} \ge 0
+\end{equation}
+が成り立つので，$\log{E(t)}$は上に凸である．
+したがって，$t=0,t_0,T\,(0<t_0<T)$における$E(t)$の値に関して，凸不等式と$E(0)\le M$から
+\begin{equation}
+  \log{E(t_0)} \le \frac{(T-t_0)\log{E(0)} + t_0\log{E(T)}}{T} \le \frac{(T-t_0)\log{M} + t_0\log{E(T)}}{T}
+\end{equation}
+が成り立つ．
+よって，$E(t_0)$は
+\begin{equation}
+  E(t_0) \le M^{(T-t_0)/T} E(T)^{t_0/T} = M \left(\frac{E(T)}{M}\right)^{t_0/T}
+\end{equation}
+と上から抑えられる．
+
+\subsection*{(3)}
+ある時刻$0\le t' \le T$で$E(t')=0$となる場合，$\log{E(t')}$が定義できないため，上の議論が成り立たない．
+この場合，$E'(t)\le 0$より$0\le E(T)\le E(t')=0$より$E(T)=0$がいえる．
+そのため，時刻$0<t_0<T$に対し，$E(t_0)$を$E(T)$を用いて評価することはできないが，$E(0)\le M$を用いた評価$E(t_0)\le E(0) \le M$は成り立つ．
+
+\section*{4}
+2つの問題を考える．
+\begin{align}
+  u_t(x,t) = u_{xx}(x,t) + \mu(t)f(x),\qquad 0<x<1,\,t>0 \\
+  u(0,t)=u(1,t)=0,\quad t>0,\qquad u(x,0)=0,\quad 0<x<1.
+\end{align}
+と
+\begin{align}
+  v_t(x,t) = v_{xx}(x,t),\qquad 0<x<1,\,t>0 \\
+  v(0,t)=v(1,t)=0,\quad t>0,\qquad v(x,0)=f(x),\quad 0<x<1.  
+\end{align}
+
+\subsection*{(1)}
+$v(x,t)$をフーリエ変換して
+\begin{equation}
+  v(x,t) = \int e^{ikx} \tilde{v}(k,t) \dd{k} \label{v_ft1}
+\end{equation}
+と書くと，
+\begin{equation}
+  0 = v_t(x,t) - v_{xx}(x,t) = \int e^{ikx} (\tilde{v}_t(k,t) + k^2 \tilde{v}(k,t)) \dd{k} 
+\end{equation}
+が得られる．
+この両辺をフーリエ逆変換することで，
+\begin{equation}
+  \tilde{v}_t(k,t) = -k^2\tilde{v}_{xx}(k,t)
+\end{equation}
+が得られる．
+これを解くと，
+\begin{equation}
+  \tilde{v}(k,t) = \tilde{v}(k,0)e^{-k^2t/2}
+\end{equation}
+となる．
+したがって，式\eqref{v_ft1}より
+\begin{equation}
+  v(x,t) = \int e^{ikx} \tilde{v}(k,0)e^{-k^2t/2} \dd{k} \label{v_ft2}
+\end{equation}
+がいえる．
+$t=0$の場合を考え，
+\begin{equation}
+  v(x,0) = \int e^{ikx} \tilde{v}(k,0) \dd{k}
+\end{equation}
+を逆フーリエ変換すると，
+\begin{equation}
+  \tilde{v}(k,0) = \frac{1}{2\pi}\int e^{-ikx} v(x,0) \dd{x} = \frac{1}{2\pi}\int e^{-ikx} f(x) \dd{x}
+\end{equation}
+が得られるので，これを式\eqref{v_ft2}に代入すると，
+\begin{align}
+  v(x,t) &= \frac{1}{2\pi} \int e^{ikx} \int e^{-iky} v(y,0) e^{-k^2t/2}  \dd{y}  \dd{k} \notag\\
+  &= \frac{1}{2\pi} \int f(y) \int  e^{ik(x-y)} e^{-k^2t/2} \dd{k} \dd{y} \notag\\
+  &= \frac{1}{2\pi} \int f(y) \int \exp{-t\left(k-\frac{i(x-y)}{2t}\right)^2-\frac{(x-y)^2}{4t}}   \dd{k}\dd{y} \notag\\
+  &= \frac{1}{2\pi} \int f(y) e^{-\frac{(x-y)^2}{4t}} \sqrt{\frac{\pi}{t}} \dd{y} \notag\\
+  &= \sqrt{\frac{1}{4\pi t}} \int  f(y) e^{-\frac{(x-y)^2}{4t}} \dd{y}
+\end{align}
+が分かる．
+
+\subsection*{(2)}
+
+\begin{equation}
+  u(x,t) = \int_0^t  \mu(s)v(x,t-s) ds
+\end{equation}
+と書けることを示す．
+そのために，右辺を$\tilde{u}(x,t)$とし，$u(x,t)=\tilde{u}(x,t)$を示す．
+
+まず，$v(x,0)=0,\,v(0,t)=v(1,t)=0$を用いると，
+\begin{equation}
+  \tilde{u}(x,0) = 0,\qquad \tilde{u}(0,t) = \tilde{u}(1,t) = 0
+\end{equation}
+が分かる．
+次に，$v(x,0)=f(x)$を用いると
+\begin{equation}
+  \partial_t \tilde{u}(x,t) =  \mu(t)v(x,0) + \int_0^t \mu(s) \partial_t v(x,t-s) ds = \mu(t)f(x) + \int_0^t \mu(s) \partial_t v(x,t-s) ds
+\end{equation}
+が分かり，
+\begin{equation}
+  \partial_{xx} \tilde{u}(x,t) =\int_0^t \mu(s)\partial_{xx} v(x,t-s) ds
+\end{equation}
+が成り立つので，$\partial_t v(x,t-s)=\partial_{xx} v(x,t-s)$より，
+\begin{equation}
+  \partial_t \tilde{u}(x,t) = \partial_{xx} \tilde{u}(x,t) + \mu(t)f(x)
+\end{equation}
+がいえる．
+以上より，$\tilde{u}(x,t)$は$u(x,t)$に関する問題の解の一つである．
+加えて，$w(x,t)=u(x,t)-\tilde{u}(x,t)$とおくと，これは
+\begin{align}
+  w_t(x,t) = w_{xx}(x,t),\qquad 0<x<1,\,t>0 \\
+  w(0,t)=w(1,t)=0,\quad t>0,\qquad w(x,0)=0,\quad 0<x<1.
+\end{align}
+の解である．
+ここで，
+\begin{equation}
+  E(t) = \int_0^1 |w(x,t)|^2 dx
+\end{equation}
+を定義すると，$E(t)\ge 0$である．
+一方
+\begin{equation}
+  \dv{E(t)}{t} =  -2\int_0^1 |w_x(x,t)|^2 dx \le 0 
+\end{equation}
+と分かるので，$E(t)$は単調非増加である．
+いま
+\begin{equation}
+  E(t) \le E(0) = 0
+\end{equation}
+より$E(t)=0$，すなわち任意の$0<x<1,t>0$に対して$w(x,t)=0$がいえる．
+したがって，$u(x,t)=\tilde{u}(x,t)$である．
+
+\subsection*{(3)}
+
+
+\end{document}

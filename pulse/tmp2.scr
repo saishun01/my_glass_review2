@@ -1,0 +1,5 @@
+set terminal postscript enhanced color lw 3.0
+set output "likelihood.ps" 
+set xlabel "{/Symbol t} ({/Symbol m}s)" 
+set ylabel "LOG LIKELIHOOD (ln(L))" 
+plot "life-likelihood.dat
